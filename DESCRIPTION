@@ -2,8 +2,11 @@ Package: lindia
 Title: Linear Regression Diagonostic Plots in GGPlot
 Version: 0.0.0.9000
 Authors@R: person("Yeuk Yu", "Lee", email = "lyeukyu@gmail.com", role = c("aut", "cre"))
-Description: Allows easy generation of linear regression diagnostic plots in GGPlot.
-Depends: R (>= 3.2.2)
+Description: Allows easy generation of linear regression diagnostic plots in
+    GGPlot.
+Depends:
+    R (>= 3.2.2)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 5.0.1
