@@ -3,10 +3,14 @@ Title: Linear Regression Diagonostic Plots in GGPlot
 Version: 0.0.0.9000
 Authors@R: person("Yeuk Yu", "Lee", email = "lyeukyu@gmail.com", role = c("aut", "cre"))
 Description: Allows easy generation of linear regression diagnostic plots in
-    GGPlot.
+    GGPlot. Graph types include residual plots, QQPlot, Boxcox graph, scale-location plot, and residual leverage plot. This package is meant for easy scheming of linear regression diagnostics. See the ggplot2 websites for more information regarding the functionality of how ggplot works.
 Depends:
     R (>= 3.2.2)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
+Imports:
+	MASS
+	ggplot2
+	gridExtra
