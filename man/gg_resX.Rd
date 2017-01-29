@@ -17,6 +17,7 @@ of residuals against predictor values
 Generate residual plot of residuals against predictors
 }
 \examples{
+gg_resX()
 
 }
 

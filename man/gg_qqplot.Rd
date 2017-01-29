@@ -2,7 +2,7 @@
 % Please edit documentation in R/main.R
 \name{gg_qqplot}
 \alias{gg_qqplot}
-\title{Generates QQPlot}
+\title{Plot quantile-quantile plot (QQPlot) in ggplot with qqline shown.}
 \usage{
 gg_qqplot(lm_object)
 }
@@ -13,9 +13,9 @@ gg_qqplot(lm_object)
 A qqplot with fitted qqline
 }
 \description{
-Generates QQPlot
+Plot quantile-quantile plot (QQPlot) in ggplot with qqline shown.
 }
 \examples{
-
+gg_qqplot*()
 }
 

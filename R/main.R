@@ -11,7 +11,7 @@ library(MASS)
 #' @param lm lm object that contains a fitted regression
 #' @param bins bin size for histogram
 #' @return A ggplot object
-#' @examples
+#' @examples gg_reshist()
 #' 
 #' @export
 #' 
@@ -40,7 +40,7 @@ gg_reshist <- function(lm_object, bins = NULL) {
 #'
 #' @param lm lm object that contains a fitted regression
 #' @return A ggplot object
-#' @examples
+#' @examples gg_resfitted()
 #' 
 #' @export
 #' 
@@ -67,7 +67,7 @@ gg_resfitted <- function(lm_object) {
 #' @param lm_object lm object that contains fitted regression
 #' @return A list of ggplot objects that contains residual plot
 #' of residuals against predictor values
-#' @examples
+#' @examples gg_resX()
 #' 
 #' @export
 gg_resX <- function(lm_object){
@@ -111,7 +111,7 @@ get_resplot <- function(var, model_matrix, lm_object){
 #'
 #' @param lm lm object that contains regression
 #' @return A qqplot with fitted qqline
-#' @examples
+#' @examples gg_qqplot*()
 #' @export
 gg_qqplot <- function(lm_object){
    
@@ -141,7 +141,7 @@ gg_qqplot <- function(lm_object){
 #' @param showlambda logical which controls whether lambda value should be displayed on graph. Defaults to TRUE
 #' @param lambdaSF controls to how many significant figure is lambda rounded to. Defaults to 3.
 #' @return A ggplot object that contains boxcox graph 
-#' @examples
+#' @examples gg_boxcox()
 #' @export
 gg_boxcox <- function(lm_object, showlambda = TRUE, lambdaSF = 3){
    
@@ -198,7 +198,7 @@ gg_boxcox <- function(lm_object, showlambda = TRUE, lambdaSF = 3){
 #'          eg. "lm", "glm", "gam", "loess", "rlm". See \url{http://docs.ggplot2.org/current/geom_smooth.html}
 #'          for more details.
 #' @return A ggplot object that contains scale-location graph 
-#' @examples
+#' @examples gg_scalelocation()
 #' @export
 gg_scalelocation <- function(lm_object, method = 'loess') {
    
@@ -213,7 +213,7 @@ gg_scalelocation <- function(lm_object, method = 'loess') {
    return (ggplot(data = df, aes(y = std_res, x = fitted_values)) + 
               geom_point() +
               geom_smooth(method = method, se = FALSE) +
-              ggtitle = "Scale-Location Plot")
+              ggtitle("Scale-Location Plot"))
 }
 
 #' Plot residual versus leverage plot in ggplot. 
@@ -223,7 +223,7 @@ gg_scalelocation <- function(lm_object, method = 'loess') {
 #'          eg. "lm", "glm", "gam", "loess", "rlm". See \url{http://docs.ggplot2.org/current/geom_smooth.html}
 #'          for more details.
 #' @return A ggplot object that contains residual vs. leverage graph 
-#' @examples
+#' @examples gg_resleverage()
 #' @export
 gg_resleverage <- function(lm_object, method = "loess") {
    
@@ -242,6 +242,14 @@ gg_resleverage <- function(lm_object, method = "loess") {
    
 }
 
+#' Plot all diagnostic plots given fitted linear regression line.
+#'
+#' @param lm lm object that contains fitted regression
+#' @param applyToAll A graphing style to apply to all plots. Default to null.
+#' @param ncol specify number of columns in resulting plot. Default to make a square matrix of the output.
+#' @return A ggplot object that contains residual vs. leverage graph 
+#' @examples gg_diagnose()
+#' @export
 gg_diagnose <- function(lm_object, applyToAll = NULL, ncol = NULL) {
    
    handle_exception(lm_object, "gg_diagnose")
