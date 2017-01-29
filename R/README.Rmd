@@ -1,0 +1,26 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, cache = TRUE,
+  comment = "# ",
+  fig.path = "figures/README-"
+)
+```
+
+
+#lindia
+
+lindia is an extention to ***ggplot2*** to allow easy plotting of linear diagnostic plots:
+```{r, warning = F, message = F}
+data(Cars93)
+cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+
+
+```
+
+
