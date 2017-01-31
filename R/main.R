@@ -22,7 +22,7 @@ gg_reshist <- function(lm_object, bins = NULL) {
    #obtain residual and fitted values from lm_object
    res = data.frame(residuals(lm_object))
    
-   if (bins == NULL) {
+   if (is.null(bins)) {
       return (ggplot(data = res, aes(x = res)) + geom_histogram(color = "white") +
                  ggtitle("Histogram of Residuals") + 
                  labs(x = "residuals"))
@@ -65,12 +65,14 @@ gg_resfitted <- function(lm_object) {
 #' Generate residual plot of residuals against predictors
 #'
 #' @param lm_object lm object that contains fitted regression
+#' @param select vector represents all variables that wanted ot be included
+#' in output. Default to all variables.
 #' @return A list of ggplot objects that contains residual plot
 #' of residuals against predictor values
 #' @examples gg_resX()
 #' 
 #' @export
-gg_resX <- function(lm_object){
+gg_resX <- function(lm_object, select = NULL){
    
    handle_exception(lm_object, "gg_resX")
    
@@ -99,11 +101,13 @@ gg_resX <- function(lm_object){
 # get_resplot returns a ggplot object of residuals in lm_object against var in model_matrix
 #
 get_resplot <- function(var, model_matrix, lm_object){
+   
+   # handle categorical and continuous
    return (ggplot(data = lm_object, aes(x = model_matrix[, var], y = lm_object$residuals)) + 
               geom_point() + 
               labs(x = var, y = "residuals") +
               geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3") + 
-              ggtitle("Residual Plot of" + var))
+              ggtitle(paste("Residual Plot of", var)))
 }
 
 
@@ -245,12 +249,12 @@ gg_resleverage <- function(lm_object, method = "loess") {
 #' Plot all diagnostic plots given fitted linear regression line.
 #'
 #' @param lm lm object that contains fitted regression
-#' @param applyToAll A graphing style to apply to all plots. Default to null.
+#' @param theme A graphing style to apply to all plots. Default to null.
 #' @param ncol specify number of columns in resulting plot. Default to make a square matrix of the output.
 #' @return A ggplot object that contains residual vs. leverage graph 
 #' @examples gg_diagnose()
 #' @export
-gg_diagnose <- function(lm_object, applyToAll = NULL, ncol = NULL) {
+gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL) {
    
    handle_exception(lm_object, "gg_diagnose")
    
@@ -285,11 +289,9 @@ gg_diagnose <- function(lm_object, applyToAll = NULL, ncol = NULL) {
 handle_exception <- function(input, function_name){
    
    # exception handling : input not lm object
-   if (class(lm_object) != "lm"){
-      stop(function_name + " doesn't know how to handle non-lm object")
+   if (class(input) != "lm"){
+      stop(paste(function_name, "doesn't know how to handle non-lm object"))
    }
-   
-   # empty lm_object
    
 }
 

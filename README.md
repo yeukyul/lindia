@@ -9,4 +9,7 @@ data(Cars93)
 cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
 ```
 
-------------------------------------------------------------------------
+How to Install
+==============
+
+-   From Github: devtools::install\_github("yeukyul/lindia")
