@@ -18,12 +18,38 @@ knitr::opts_chunk$set(
 lindia is an extention to ***ggplot2*** to allow easy plotting of linear diagnostic plots:
 ```{r, warning = F, message = F}
 library(MASS)
+library(ggplot2)
+library(lindia)
 data(Cars93)
 cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+gg_resfitted(cars_lm)
+```
+Tha above are basic plotting features of `lindia`. All functions in `lindia` takes in lm object and return linear diagnostic plots in types of `ggplot`. All themes in `lindia` plots can be overwritten by a call to `ggplot` `theme()` .
+
+```{r, warning = F, message = F}
+gg_reshist(cars_lm) + theme_bw()
 ```
 
 
+#Functions in Lindia
+
+###gg_rehist
+```{r, warning = F, message = F}
+gg_reshist(cars_lm)
+```
+
+Can also specify number of bins using `bins` argument:
+```{r, warning = F, message = F}
+gg_reshist(cars_lm, bins = 20)
+```
+
+###gg_resfitted
+Plots residual against fitted value.
+```{r, warning = F, message = F}
+gg_resfitted(cars_lm)
+```
+
 #How to Install
-+ From Github:  devtools::install_github("yeukyul/lindia")
++ From Github:  `devtools::install_github("yeukyul/lindia")`
 
 

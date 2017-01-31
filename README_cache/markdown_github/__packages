@@ -1,8 +1,8 @@
 base
-methods
-datasets
-utils
-grDevices
-graphics
-stats
 MASS
+gridExtra
+roxygen2
+ggplot2
+np
+rmarkdown
+lindia
