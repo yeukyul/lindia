@@ -15,7 +15,8 @@ knitr::opts_chunk$set(
 
 #lindia
 
-lindia is an extention to ***ggplot2*** to allow easy plotting of linear diagnostic plots:
+lindia is an extention to ***ggplot2*** to allow easy plotting of linear diagnostic plots. The following demonstrates basic plotting features of `lindia`. All functions in `lindia` takes in lm object and return linear diagnostic plots in types of `ggplot`.
+
 ```{r, warning = F, message = F}
 library(MASS)
 library(ggplot2)
@@ -24,7 +25,9 @@ data(Cars93)
 cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
 gg_resfitted(cars_lm)
 ```
-Tha above are basic plotting features of `lindia`. All functions in `lindia` takes in lm object and return linear diagnostic plots in types of `ggplot`. All themes in `lindia` plots can be overwritten by a call to `ggplot` `theme()` .
+
+All themes in `lindia` plots can be overwritten by a call to `ggplot::theme()`.
+
 
 ```{r, warning = F, message = F}
 gg_reshist(cars_lm) + theme_bw()
@@ -33,7 +36,9 @@ gg_reshist(cars_lm) + theme_bw()
 
 #Functions in Lindia
 
-###gg_rehist
+###gg_reshist
+
+Plot distribution of residuals in histograms. Number of bins picked by default.
 ```{r, warning = F, message = F}
 gg_reshist(cars_lm)
 ```
@@ -48,6 +53,7 @@ Plots residual against fitted value.
 ```{r, warning = F, message = F}
 gg_resfitted(cars_lm)
 ```
+
 
 #How to Install
 + From Github:  `devtools::install_github("yeukyul/lindia")`
