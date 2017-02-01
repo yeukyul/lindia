@@ -29,14 +29,16 @@ Followed are functions implemented in `lindia`:
 
 -   `gg_reshist()`: plotting the histogram of distribution of residuals
 -   `gg_resfitted()`: residual plot of residuals by fitted value
--   `gg_resX()`: a list of residual plots of all predictors by fitted value (continuous variables only for now. Categorical and interaction terms s are developing.)
+-   `gg_resX()`: a list of residual plots of all predictors by fitted value (continuous variables only for now. Categorical and interaction terms are developing.)
 -   `gg_qqplot()`: Normaility quantile-quantile plot (QQPlot) with qqline overlayed on top
 -   `gg_boxcox()`: boxcox graph with optimal transformation labeled on graph
 -   `gg_scalelocation()`: scale-location plot (also called spread-location plot).
 -   `gg_resleverage()`: residual vs. leverage plot. (cook distance indicators not implemented for now)
--   `gg_diagnose()`: all diagnostic plots being layed out on a grid.
+-   `gg_diagnose()`: all diagnostic plots being layed out on a grid (not functional yet).
 
-Functions that maybe implemented: + `diagnames()`: returns a vector of names of all diagnostic plots available for a given lm object
+Functions that maybe implemented:
+
+-   `diagnames()`: returns a vector of names of all diagnostic plots available for a given lm object
 
 Functions in Lindia
 ===================
