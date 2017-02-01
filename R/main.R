@@ -102,12 +102,33 @@ gg_resX <- function(lm_object, select = NULL){
 #
 get_resplot <- function(var, model_matrix, lm_object){
    
-   # handle categorical and continuous
-   return (ggplot(data = lm_object, aes(x = model_matrix[, var], y = lm_object$residuals)) + 
-              geom_point() + 
-              labs(x = var, y = "residuals") +
-              geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3") + 
-              ggtitle(paste("Residual Plot of", var)))
+   # handle categorical and continuous variables
+   x = model_matrix[, var]
+   base_plot = ggplot(data = lm_object, aes(x = model_matrix[, var], y = lm_object$residuals)) + 
+                  labs(x = var, y = "residuals") + 
+                  ggtitle(paste("Residual Plot of", var))
+   
+   #if (is.numeric(x)) {
+   return (base_plot + 
+              geom_point() +
+              geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3"))
+   #}
+   #else {
+   #   return (base_plot + geom_boxplot())
+   #}
+}
+
+
+#
+# get_resplot returns a ggplot object of scatterplot of interaction terms 
+get_interplot <- function(model_matrix, interactions) {
+   # !!!! multi dimensional interacton plot?
+   if (length(interactions) > 2) {
+      stop("lindia doesn't know how to handle interaction terms with dimension greater than 2")
+   }
+   
+   return (ggplot(data = model_matrix, aes(x = interaction[1], y = interaction[2])) +
+              ggtitle(paste("Interaction between", interaction[1], "and", interaction[2])) +)
 }
 
 
@@ -263,7 +284,7 @@ gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL) {
    n_plot = n_plot + 5
    
    # compute the best dimension for resulting plot
-   if (ncol == NULL) {
+   if (is.null(ncol)) {
       nCol = max(floor(sqrt(n_plots)), 1)
    }
    else {
@@ -271,6 +292,7 @@ gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL) {
    }
    
    # get all plots
+   # !!!! not implemented: should ignore plots that cannot be generated
    plots[["residual_hist"]] <- gg_reshist(lm_object)
    plots[["res_fitted"]] <- gg_resfitted(lm_object)
    plots[["res_X"]] <- gg_resX(lm_object)
@@ -281,6 +303,53 @@ gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL) {
    
    return (do.call("grid.arrange", c(plots, ncol = nCol)))
    
+}
+
+get_varnames <- function(lm_object) {
+   
+   lm_formula = as.character(formula(lm_object))
+   var_names_list = strsplit(lm_formula, ' ~ ')
+   var_name_vec = strsplit_vec(lm_formula, ' ~ ')
+   
+   # drop response variable
+   args_str = var_name_vec
+   
+   # parse args in lm
+   args = unlist(strsplit_vec(args_str, " \\+ "))
+   n_args = length(args)
+   predictors = c()
+   interaction = list()
+   
+   # count how many interaction terms there are
+   # used for storing variables in return list
+   n_inter = 1
+   
+   # find interaction terms
+   for (i in 1:n_args) {
+      term = args[i]
+      
+      # check if it is interaction term
+      # !! caution: check if it works with multiple interaction
+      if (grepl(' \\* ', term)) {
+         inter_terms = unlist(strsplit(term, " \\* "))
+         predictors = c(predictors, inter_terms)
+         interaction[[n_inter]] = inter_terms
+         n_inter = n_inter + 1
+      }
+      else {
+         predictors = c(predictors, term)
+      }
+   }
+   
+   # clean up duplicated predictors from extracting from interaction terms
+   predictors = unique(predictors)
+   
+   return (list(predictors = predictors, interactions = interaction))
+}
+
+# returns a vector as a result of string splitting
+strsplit_vec <- function(str, split) {
+   return (unlist(strsplit(str, split))[-1])
 }
 
 #

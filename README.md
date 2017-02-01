@@ -53,6 +53,16 @@ gg_resfitted(cars_lm)
 
 ![](figures/README-unnamed-chunk-6-1.png)
 
+### gg\_boxocx
+
+Plots boxcox graph of given lm object, with labels showing optimal transforming power. Can hide labels by setting `showlambda` to `FALSE`.
+
+``` r
+gg_boxcox(cars_lm)
+```
+
+![](figures/README-unnamed-chunk-7-1.png)
+
 How to Install
 ==============
 

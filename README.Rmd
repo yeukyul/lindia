@@ -55,6 +55,13 @@ gg_resfitted(cars_lm)
 ```
 
 
+###gg_boxocx
+
+Plots boxcox graph of given lm object, with labels showing optimal transforming power. Can hide labels by setting `showlambda` to `FALSE`.
+```{r, warning = F, message = F}
+gg_boxcox(cars_lm)
+```
+
 #How to Install
 + From Github:  `devtools::install_github("yeukyul/lindia")`
 
