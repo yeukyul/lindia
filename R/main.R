@@ -128,7 +128,7 @@ get_interplot <- function(model_matrix, interactions) {
    }
    
    return (ggplot(data = model_matrix, aes(x = interaction[1], y = interaction[2])) +
-              ggtitle(paste("Interaction between", interaction[1], "and", interaction[2])) +)
+              ggtitle(paste("Interaction between", interaction[1], "and", interaction[2])))
 }
 
 
@@ -305,6 +305,9 @@ gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL) {
    
 }
 
+#'Return all variables names in a given lm object
+#'
+#'@export 
 get_varnames <- function(lm_object) {
    
    lm_formula = as.character(formula(lm_object))
