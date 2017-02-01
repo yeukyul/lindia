@@ -168,7 +168,7 @@ gg_qqplot <- function(lm_object){
 #' @return A ggplot object that contains boxcox graph 
 #' @examples gg_boxcox()
 #' @export
-gg_boxcox <- function(lm_object, showlambda = TRUE, lambdaSF = 3){
+gg_boxcox <- function(lm_object, showlambda = TRUE, lambda_sf = 3){
    
    handle_exception(lm_object, "gg_boxcox")
    
@@ -205,7 +205,7 @@ gg_boxcox <- function(lm_object, showlambda = TRUE, lambdaSF = 3){
       geom_vline(xintercept = conf_hi, linetype = "dotted")
    
    # add label if show lambda range
-   if (showLambda) {
+   if (showlambda) {
       return(plot +  
                 geom_text(aes(x = best_lambda, label = as.character(rounded_lambda), y = min_y), color = "indianred3") +
                 geom_text(aes(x = conf_lo, label = as.character(conf_lo), y = min_y)) +
