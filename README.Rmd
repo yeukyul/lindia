@@ -80,6 +80,14 @@ Plots boxcox graph of given lm object, with labels showing optimal transforming 
 gg_boxcox(cars_lm)
 ```
 
+#Package Dependency
+
+Lindia is built on top of the following few packages:
+
++ `ggplot2`
+
++ `gridExtra`
+
 #How to Install
 + From Github:  `devtools::install_github("yeukyul/lindia")`
 

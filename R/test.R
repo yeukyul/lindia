@@ -5,6 +5,7 @@
 # cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
 # cars_lm_2 <- lm(Rev.per.mile ~ Passengers + Length + RPM + Manufacturer, data = Cars93)
 # cars_lm_3 <- lm(Rev.per.mile ~ Passengers + Length + RPM + Manufacturer + Weight * Length, data = Cars93)
+# cars_lm_4 <- lm(Rev.per.mile ~ Passengers + Length + RPM + Manufacturer + Type + Make * Origin , data = Cars93)
 # 
 # 
 # gg_resfitted(cars_lm)
@@ -58,7 +59,10 @@
 # }
 # 
 # 
-# 
+# # testing
+# n_cat(get_varnames(cars_lm_3)$predictor, model.matrix(cars_lm_3)) # expect 1
+# n_cat(get_varnames(cars_lm_2)$predictor, model.matrix(cars_lm_2)) # expect 1
+# n_cat(get_varnames(cars_lm_4)$predictor, model.matrix(cars_lm_4)) # expect 4
 # 
 # 
 # 
@@ -140,27 +144,3 @@
 # 
 # plots <- function_2(cars_lm)
 # grid.arrange(plots[[1]], plots[[2]], plots[[3]], nrow = 1)
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 

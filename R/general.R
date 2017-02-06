@@ -1,0 +1,143 @@
+
+# This file contains general helper functions used in lindia
+
+
+# strsplit_vec - splits a string and returns a vector
+#
+# input: str - string to be splitted
+#        split - character to be splitted by 
+# output: a vector as a result of string splitting
+#
+strsplit_vec <- function(str, split) {
+   return (unlist(strsplit(str, split))[-1])
+}
+
+
+#
+# get_resplot - returns a ggplot object of residuals in lm_object against var in model_matrix
+#
+# input : var - variable name string the residual plot is about
+#         model_matrix - model matrix of the fitted lm
+#        lm_object : fitted lm
+#        data : original dataset (optional)
+#
+# output : a ggplot object of var vs. residual of fitted lm
+#
+get_resplot <- function(var, model_matrix, lm_object, data){
+   
+   # to center residual plot around y = 0 line
+   res = residuals(lm_object)
+   limit = max(abs(res))
+   margin_factor = 5
+   margin = round(limit / margin_factor)
+   
+   # handle categorical and continuous variables
+   if (!is.null(data)) {
+      x = data[, var]
+   }
+   else {
+      x = model_matrix[, var]
+   }
+   
+   # handle numeric variable
+   if (is.numeric(x)) {
+      return (ggplot(data = lm_object, aes(x = model_matrix[, var], y = lm_object$residuals)) + 
+                 labs(x = var, y = "residuals") + 
+                 ggtitle(paste("Residual vs.", var)) + 
+                 geom_point() +
+                 geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3") +
+                 ylim(-(limit + margin), limit + margin))
+   }
+   
+   if (is.null(data)) {
+      message(paste("Find categorical variable '", var,"'. Should pass in the dataset as 'data' parameter to allow plotting. Lindia igonore plot for now."))
+      return (NULL)
+   }
+   else {
+      return (ggplot(data = data, aes(x = data[, var], y = lm_object$residuals)) + 
+                 labs(x = var, y = "residuals") + 
+                 ggtitle(paste("Residual vs.", var)) + 
+                 geom_boxplot())
+   }
+}
+
+#
+# n_cat - returns the index of categorical varible in given regression
+#
+# input : varnames - vector of variable name strings
+#         model_matrix - model_matrix of the fitted lm
+# output : index of categorical varible in given regression
+#
+n_cat <- function(varnames, model_matrix) {
+   cat_inds = c()
+   modelvars = colnames(model_matrix)
+   for (i in 1:length(varnames)) {
+      name = varnames[i]
+      if (!(name %in% modelvars)) {
+         cat_inds = c(cat_inds, i)
+      }
+   }
+   return (cat_inds)
+}
+
+#
+# get_ncols - returns the appropriate number of columns to arrange number of plots
+#              into a square display grid. ncol returned would at least be 1.
+#
+# input : n_plots - number of plots
+# output : a number represents number of column needed to organize the plots into a square grid
+#
+get_ncol <- function(n_plots) {
+   return(max(floor(sqrt(n_plots)), 1))
+}
+
+
+#
+# get_varnames - returns variable names in a lm.
+#
+# input : lm_object - fitted lm
+# output : list of two items
+#                    [[1]] : string variable names in fitted lm
+#                    [[2]] : vector of interaction terms
+#
+get_varnames <- function(lm_object) {
+   
+   lm_formula = as.character(formula(lm_object))
+   var_names_list = strsplit(lm_formula, ' ~ ')
+   var_name_vec = strsplit_vec(lm_formula, ' ~ ')
+   
+   # drop response variable
+   args_str = var_name_vec
+   
+   # parse args in lm
+   args = unlist(strsplit_vec(args_str, " \\+ "))
+   n_args = length(args)
+   predictors = c()
+   interaction = list()
+   
+   # count how many interaction terms there are
+   # used for storing variables in return list
+   n_inter = 1
+   
+   # find interaction terms
+   for (i in 1:n_args) {
+      term = args[i]
+      
+      # check if it is interaction term
+      # !! caution: check if it works with multiple interaction
+      if (grepl(' \\* ', term)) {
+         inter_terms = unlist(strsplit(term, " \\* "))
+         predictors = c(predictors, inter_terms)
+         interaction[[n_inter]] = inter_terms
+         n_inter = n_inter + 1
+      }
+      else {
+         predictors = c(predictors, term)
+      }
+   }
+   
+   # clean up duplicated predictors from extracting from interaction terms
+   predictors = unique(predictors)
+   
+   return (list(predictors = predictors, interactions = interaction))
+}
