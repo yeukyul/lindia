@@ -22,6 +22,8 @@ gg_reshist(cars_lm) + theme_bw()
 
 ![](figures/README-unnamed-chunk-3-1.png)
 
+Please note that `lindia` does not provide ***all*** diagnostic plots necessary for checking linear model assumptions. Refer to ggpairs to check if multicolinearity assumption has been violated.
+
 Overview
 ========
 

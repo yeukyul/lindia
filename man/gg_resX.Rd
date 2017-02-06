@@ -4,13 +4,17 @@
 \alias{gg_resX}
 \title{Generate residual plot of residuals against predictors}
 \usage{
-gg_resX(lm_object, select = NULL)
+gg_resX(lm_object, data = NULL, select = NULL, plotAll = TRUE)
 }
 \arguments{
 \item{lm_object}{lm object that contains fitted regression}
 
 \item{select}{vector represents all variables that wanted ot be included
 in output. Default to all variables.}
+
+\item{plotAll}{boolean value to determine whether plot will be return as 
+a plot arranged using `grid.arrange()`. When set to false, the function
+would return a list of residual plots. Parameter defaults to TRUE.}
 }
 \value{
 A list of ggplot objects that contains residual plot

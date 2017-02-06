@@ -4,12 +4,17 @@
 \alias{gg_diagnose}
 \title{Plot all diagnostic plots given fitted linear regression line.}
 \usage{
-gg_diagnose(lm_object, theme = NULL, ncol = NULL)
+gg_diagnose(lm_object, theme = NULL, ncol = NULL, include = NULL,
+  exclude = NULL)
 }
 \arguments{
 \item{theme}{A graphing style to apply to all plots. Default to null.}
 
 \item{ncol}{specify number of columns in resulting plot. Default to make a square matrix of the output.}
+
+\item{include}{specify diagnostic plots to include, will plot all if both include and exclude are passed in.}
+
+\item{exclude}{specify diagnostic plots to exclude, will plot all if both include and exclude are passed in.}
 
 \item{lm}{lm object that contains fitted regression}
 }

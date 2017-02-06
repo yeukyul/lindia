@@ -3,6 +3,7 @@
 library(ggplot2)
 library(roxygen2)
 library(gridExtra)
+library(rmarkdown)
 library(MASS)
 
 
@@ -52,9 +53,18 @@ gg_resfitted <- function(lm_object) {
    res = residuals(lm_object)
    fitted_values = fitted(lm_object)
    
+   # to center residual plot around y = 0 line
+   limit = max(abs(res))
+   margin_factor = 5
+   margin = round(limit / margin_factor)
+   
    df = data.frame(res, fitted_values)
    names(df) = c("residuals", "fitted_values")
-   return (ggplot(data = df, aes(y = residuals, x = fitted_values)) + geom_point())
+   return (ggplot(data = df, aes(y = residuals, x = fitted_values)) + 
+              geom_point() +
+              geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3")  +
+              ylim(-(limit + margin), limit + margin) + 
+              ggtitle("Residual vs. Fitted Value")) 
 }
 
 # only works for continuous variables
@@ -65,14 +75,18 @@ gg_resfitted <- function(lm_object) {
 #' Generate residual plot of residuals against predictors
 #'
 #' @param lm_object lm object that contains fitted regression
+#' @param data original dataset
 #' @param select vector represents all variables that wanted ot be included
 #' in output. Default to all variables.
+#' @param plotAll boolean value to determine whether plot will be return as 
+#' a plot arranged using `grid.arrange()`. When set to false, the function
+#' would return a list of residual plots. Parameter defaults to TRUE.
 #' @return A list of ggplot objects that contains residual plot
 #' of residuals against predictor values
 #' @examples gg_resX()
 #' 
 #' @export
-gg_resX <- function(lm_object, select = NULL){
+gg_resX <- function(lm_object, data = NULL, select = NULL, plotAll = TRUE){
    
    handle_exception(lm_object, "gg_resX")
    
@@ -80,7 +94,7 @@ gg_resX <- function(lm_object, select = NULL){
    model_matrix = model.matrix(lm_object)
    
    # extract relevant explanatory variables in model matrix
-   var_names = colnames(model_matrix)[-1]
+   var_names = get_varnames(lm_object)[[1]]
    dim = length(var_names)
    
    # create a list to hold all residual plots
@@ -88,34 +102,71 @@ gg_resX <- function(lm_object, select = NULL){
    
    for (i in 1:dim){
       var = var_names[i]
-      plots[[i]] <- get_resplot(var, model_matrix, lm_object)
+      this_plot <- get_resplot(var, model_matrix, lm_object, data = data)
+      if (!is.null(this_plot)) {
+         plots[[i]] <- this_plot
+      }
    }
    
    # rename plots in the array
    names(plots) = var_names
    
+   
+   #if (plotAll) {
+   #   nCol = get_ncol(sum(!is.na(plots)))
+   #   return (do.call("grid.arrange", c(plots, ncol = nCol)))
+   #}
+   #else {
+   #   return (plots)
+   #}
+   
    plots
+
 }
 
 #
 # get_resplot returns a ggplot object of residuals in lm_object against var in model_matrix
 #
-get_resplot <- function(var, model_matrix, lm_object){
+get_resplot <- function(var, model_matrix, lm_object, data){
+   
+   # to center residual plot around y = 0 line
+   res = residuals(lm_object)
+   limit = max(abs(res))
+   margin_factor = 5
+   margin = round(limit / margin_factor)
    
    # handle categorical and continuous variables
-   x = model_matrix[, var]
-   base_plot = ggplot(data = lm_object, aes(x = model_matrix[, var], y = lm_object$residuals)) + 
-                  labs(x = var, y = "residuals") + 
-                  ggtitle(paste("Residual Plot of", var))
+   if (!is.null(data)) {
+      x = data[, var]
+   }
+   else if (var %in% colnames(model_matrix)) {
+      x = model_matrix[, var]
+   }
+   else {
+      message(paste("Find categorical variable `", var,". Should pass in the dataset as 'data' parameter to allow plotting. Lindia igonore plot for now."))
+      return (NULL)
+   }
    
-   #if (is.numeric(x)) {
-   return (base_plot + 
+   # handle numeric variable
+   if (is.numeric(x)) {
+      return (ggplot(data = lm_object, aes(x = model_matrix[, var], y = lm_object$residuals)) + 
+              labs(x = var, y = "residuals") + 
+              ggtitle(paste("Residual vs.", var)) + 
               geom_point() +
-              geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3"))
-   #}
-   #else {
-   #   return (base_plot + geom_boxplot())
-   #}
+              geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3") +
+              ylim(-(limit + margin), limit + margin))
+   }
+   
+   if (is.null(data)) {
+      message(paste("Find categorical variable '", var,"'. Should pass in the dataset as 'data' parameter to allow plotting. Lindia igonore plot for now."))
+      return (NULL)
+   }
+   else {
+      return (ggplot(data = data, aes(x = data[, var], y = lm_object$residuals)) + 
+                 labs(x = var, y = "residuals") + 
+                 ggtitle(paste("Residual vs.", var)) + 
+                 geom_boxplot())
+   }
 }
 
 
@@ -168,7 +219,7 @@ gg_qqplot <- function(lm_object){
 #' @return A ggplot object that contains boxcox graph 
 #' @examples gg_boxcox()
 #' @export
-gg_boxcox <- function(lm_object, showlambda = TRUE, lambda_sf = 3){
+gg_boxcox <- function(lm_object, showlambda = TRUE, lambdaSF = 3){
    
    handle_exception(lm_object, "gg_boxcox")
    
@@ -188,13 +239,13 @@ gg_boxcox <- function(lm_object, showlambda = TRUE, lambda_sf = 3){
    
    # obtain best lamda
    best_lambda <- x[which.max(y)]
-   rounded_lambda <- round(best_lambda, lambda_sf)
+   rounded_lambda <- round(best_lambda, lambdaSF)
    min_y <- min(y)
    
    # compute accepted range of lambda transformation 
    accept_range <- x[y > max(y) - 1/2 * qchisq(.95,1)]
-   conf_lo <- round(min(accept_range), lambda_sf)
-   conf_hi <- round(max(accept_range), lambda_sf)
+   conf_lo <- round(min(accept_range), lambdaSF)
+   conf_hi <- round(max(accept_range), lambdaSF)
    
    plot <- ggplot(data = boxcox_unlist) + 
       geom_segment(aes(x = xstart, y = ystart, xend = xend, yend = yend)) +
@@ -267,25 +318,40 @@ gg_resleverage <- function(lm_object, method = "loess") {
    
 }
 
+# returns the appropriate number of columns for grid arrange.
+# ncol returned would at least be 1.
+get_ncol <- function(n_plots) {
+   return(max(floor(sqrt(n_plots)), 1))
+}
+
 #' Plot all diagnostic plots given fitted linear regression line.
 #'
 #' @param lm lm object that contains fitted regression
 #' @param theme A graphing style to apply to all plots. Default to null.
 #' @param ncol specify number of columns in resulting plot. Default to make a square matrix of the output.
+#' @param exclude specify diagnostic plots to exclude, will plot all if both include and exclude are passed in.
+#' @param include specify diagnostic plots to include, will plot all if both include and exclude are passed in.
 #' @return A ggplot object that contains residual vs. leverage graph 
 #' @examples gg_diagnose()
 #' @export
-gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL) {
+gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL, include = NULL, exclude = NULL) {
    
    handle_exception(lm_object, "gg_diagnose")
    
    # compute total number of diagnostic plots
-   n_plots = cols(model.matrix(lm_object)) - 1
-   n_plot = n_plot + 5
+   n_plots = length(get_varnames(lm_object)[[1]])
+   n_plots = n_plots + 6
    
    # compute the best dimension for resulting plot
-   if (is.null(ncol)) {
-      nCol = max(floor(sqrt(n_plots)), 1)
+   if (!is.null(include)) {
+      nCol = get_ncol(length(include))
+      n_plot = length(include)
+   }
+   else if (!is.null(exclude)) {
+      nCol = n_plot - length(exclude)
+   }
+   else if (is.null(ncol)) {
+      nCol = get_ncol(n_plots)
    }
    else {
       nCol = ncol
@@ -295,7 +361,7 @@ gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL) {
    # !!!! not implemented: should ignore plots that cannot be generated
    plots[["residual_hist"]] <- gg_reshist(lm_object)
    plots[["res_fitted"]] <- gg_resfitted(lm_object)
-   plots[["res_X"]] <- gg_resX(lm_object)
+   #plots[["res_X"]] <- gg_resX(lm_object)
    plots[["gg_qqplot"]] <- gg_qqplot(lm_object)
    plots[["gg_boxcox"]] <- gg_boxcox(lm_object)
    plots[["gg_scalelocation"]] <- gg_scalelocation(lm_object)
@@ -307,7 +373,6 @@ gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL) {
 
 #'Return all variables names in a given lm object
 #'
-#'@export 
 get_varnames <- function(lm_object) {
    
    lm_formula = as.character(formula(lm_object))

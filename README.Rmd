@@ -33,6 +33,8 @@ All themes in `lindia` plots can be overwritten by a call to `ggplot::theme()`.
 gg_reshist(cars_lm) + theme_bw()
 ```
 
+Please note that `lindia` does not provide ***all*** diagnostic plots necessary for checking linear model assumptions. Refer to ggpairs to check if multicolinearity assumption has been violated.
+
 #Overview
 Followed are functions implemented in `lindia`:
 
