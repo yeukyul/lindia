@@ -31,6 +31,8 @@ get_resplot <- function(var, model_matrix, lm_object, data){
    margin_factor = 5
    margin = round(limit / margin_factor)
    
+   n_var_threshold = 4    # if more number of variables than threshold, tilt label to 45 degrees
+   
    # handle categorical and continuous variables
    if (!is.null(data)) {
       x = data[, var]
@@ -54,10 +56,17 @@ get_resplot <- function(var, model_matrix, lm_object, data){
       return (NULL)
    }
    else {
-      return (ggplot(data = data, aes(x = data[, var], y = lm_object$residuals)) + 
+      base_plot = ggplot(data = data, aes(x = data[, var], y = lm_object$residuals)) + 
                  labs(x = var, y = "residuals") + 
                  ggtitle(paste("Residual vs.", var)) + 
-                 geom_boxplot())
+                 geom_boxplot()
+#       if (unique(data[, var]) > n_var_threshold) {
+#          return (base_plot + theme(axis.text.x = element_text(angle = 45, hjust = 1)))
+#       }
+#       else {
+#          return (base_plot)
+#       }
+      return(base_plot)
    }
 }
 
