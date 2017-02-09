@@ -32,7 +32,8 @@ gg_boxcox <- function(lm_object, showlambda = TRUE, lambdaSF = 3){
    min_y <- min(y)
    
    # compute accepted range of lambda transformation 
-   accept_range <- x[y > max(y) - 1/2 * qchisq(.95,1)]
+   accept_inds <- which(y > max(y) - 1/2 * qchisq(.95,1))
+   accept_range <- x[accept_inds]
    conf_lo <- round(min(accept_range), lambdaSF)
    conf_hi <- round(max(accept_range), lambdaSF)
    
@@ -42,7 +43,8 @@ gg_boxcox <- function(lm_object, showlambda = TRUE, lambdaSF = 3){
       ggtitle("Boxcox Plot") + 
       geom_vline(xintercept = best_lambda, linetype = "dotted") + 
       geom_vline(xintercept = conf_lo, linetype = "dotted") + 
-      geom_vline(xintercept = conf_hi, linetype = "dotted")
+      geom_vline(xintercept = conf_hi, linetype = "dotted") +
+      geom_hline(yintercept = y[min(accept_inds)], linetype = "dotted")
    
    # add label if show lambda range
    if (showlambda) {

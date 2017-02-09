@@ -2,7 +2,11 @@
 #'
 #' @param plots a list of plots
 #' @return plots in a given list arrangeed using gridExtra
-#' @examples 
+#' @examples plots <- gg_diagnose(reg.line)
+#'          names(plots)
+#'          selected.plots <- plots[-c(2, 5)]
+#'          plot_all(selected.plots)
+#'          
 #' @export
 plot_all <- function(plots, ncol = NULL) {
    

@@ -15,4 +15,11 @@ plots in a given list arrangeed using gridExtra
 \description{
 Plot all given plots in a square matrix form.
 }
+\examples{
+plots <- gg_diagnose(reg.line)
+         names(plots)
+         selected.plots <- plots[-c(2, 5)]
+         plot_all(selected.plots)
+         
+}
 
