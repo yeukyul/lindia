@@ -13,62 +13,6 @@ strsplit_vec <- function(str, split) {
 }
 
 
-#
-# get_resplot - returns a ggplot object of residuals in lm_object against var in model_matrix
-#
-# input : var - variable name string the residual plot is about
-#         model_matrix - model matrix of the fitted lm
-#        lm_object : fitted lm
-#        data : original dataset (optional)
-#
-# output : a ggplot object of var vs. residual of fitted lm
-#
-get_resplot <- function(var, model_matrix, lm_object, data){
-   
-   # to center residual plot around y = 0 line
-   res = residuals(lm_object)
-   limit = max(abs(res))
-   margin_factor = 5
-   margin = round(limit / margin_factor)
-   
-   n_var_threshold = 4    # if more number of variables than threshold, tilt label to 45 degrees
-   
-   # handle categorical and continuous variables
-   if (!is.null(data)) {
-      x = data[, var]
-   }
-   else {
-      x = model_matrix[, var]
-   }
-   
-   # handle numeric variable
-   if (is.numeric(x)) {
-      return (ggplot(data = lm_object, aes(x = model_matrix[, var], y = lm_object$residuals)) + 
-                 labs(x = var, y = "residuals") + 
-                 ggtitle(paste("Residual vs.", var)) + 
-                 geom_point() +
-                 geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3") +
-                 ylim(-(limit + margin), limit + margin))
-   }
-   
-   if (is.null(data)) {
-      message(paste("Find categorical variable '", var,"'. Should pass in the dataset as 'data' parameter to allow plotting. Lindia igonore plot for now."))
-      return (NULL)
-   }
-   else {
-      base_plot = ggplot(data = data, aes(x = data[, var], y = lm_object$residuals)) + 
-                 labs(x = var, y = "residuals") + 
-                 ggtitle(paste("Residual vs.", var)) + 
-                 geom_boxplot()
-#       if (unique(data[, var]) > n_var_threshold) {
-#          return (base_plot + theme(axis.text.x = element_text(angle = 45, hjust = 1)))
-#       }
-#       else {
-#          return (base_plot)
-#       }
-      return(base_plot)
-   }
-}
 
 #
 # n_cat - returns the index of categorical varible in given regression
