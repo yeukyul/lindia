@@ -1,7 +1,8 @@
 
 # This file contains general helper functions used in lindia
 
-
+#' @import ggplot2
+#' @import gridExtra grid.arrange
 # strsplit_vec - splits a string and returns a vector
 #
 # input: str - string to be splitted

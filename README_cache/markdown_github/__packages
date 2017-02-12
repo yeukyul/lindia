@@ -7,3 +7,15 @@ np
 rmarkdown
 lindia
 devtools
+shiny
+leaflet
+RColorBrewer
+metricsgraphics
+dplyr
+plotly
+data.table
+shinydashboard
+radarchart
+DT
+chartjs
+stringi
