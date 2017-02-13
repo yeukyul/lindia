@@ -22,7 +22,7 @@ data(Cars93)
 
 lindia is an extention to ***ggplot2*** to provide streamlined plotting features of linear diagnostic plots. The following demonstrates basic plotting features of `lindia`. All functions in `lindia` takes in an lm object and return linear diagnostic plots in types of `ggplot`. The following code demonstrates how you can create a simple linear model from `Cars93` dataset, then use a call to `lindia::gg_diagnose` to visualize overall features of the distribution.
 
-```{r, warning = F, message = F, fig.width = 10, fig.height = 7}
+```{r, warning = F, message = F, fig.width = 12, fig.height = 7}
 # create linear model
 cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
 
@@ -149,7 +149,7 @@ gg_resleverage(cars_lm)
 
 An aggregate plot of all diagnostics plots, layed out in one panel as demonstrated in the beginning of read me. User can set `theme` parameter to a specific theme type to apply to all plots in the panel. Notice that same as [`gg_resX`](# gg_resX), user would have to pass in original dataset of the lm_object in order for residual plots of categorical variables to be plotted.
 
-```{r, warning = F, message = F, fig.width = 10, fig.height = 7}
+```{r, warning = F, message = F, fig.width = 12, fig.height = 7}
 gg_diagnose(cars_lm_2, theme = theme_bw(), data = Cars93)
 ```
 
