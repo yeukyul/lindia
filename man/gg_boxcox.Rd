@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg_boxcox.R
 \name{gg_boxcox}
 \alias{gg_boxcox}
-\title{Plot boxcox graph in ggplot with suggested lambda transformation and 95% confidence level.}
+\title{Plot boxcox graph in ggplot with suggested lambda transformation}
 \usage{
 gg_boxcox(lm_object, showlambda = TRUE, lambdaSF = 3)
 }
@@ -17,7 +17,7 @@ gg_boxcox(lm_object, showlambda = TRUE, lambdaSF = 3)
 A ggplot object that contains boxcox graph
 }
 \description{
-Plot boxcox graph in ggplot with suggested lambda transformation and 95% confidence level.
+Plot boxcox graph in ggplot with suggested lambda transformation
 }
 \examples{
 library(MASS)

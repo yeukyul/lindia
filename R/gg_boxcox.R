@@ -1,6 +1,6 @@
 
 
-#' Plot boxcox graph in ggplot with suggested lambda transformation and 95% confidence level.
+#' Plot boxcox graph in ggplot with suggested lambda transformation
 #'
 #' @param lm lm object that contains fitted regression
 #' @param showlambda logical which controls whether lambda value should be displayed on graph. Defaults to TRUE
