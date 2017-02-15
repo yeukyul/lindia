@@ -20,6 +20,9 @@ A ggplot object that contains scale-location graph
 Plot scale-location (also called spread-location plot) in ggplot.
 }
 \examples{
-gg_scalelocation()
+library(MASS)
+data(Cars93)
+cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+gg_scalelocation(cars_lm)
 }
 

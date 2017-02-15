@@ -6,7 +6,10 @@
 #'          eg. "lm", "glm", "gam", "loess", "rlm". See \url{http://docs.ggplot2.org/current/geom_smooth.html}
 #'          for more details.
 #' @return A ggplot object that contains scale-location graph 
-#' @examples gg_scalelocation()
+#' @examples library(MASS)
+#' data(Cars93)
+#' cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+#' gg_scalelocation(cars_lm)
 #' @export
 gg_scalelocation <- function(lm_object, method = 'loess') {
    
