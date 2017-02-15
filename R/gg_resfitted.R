@@ -3,7 +3,10 @@
 #'
 #' @param lm lm object that contains a fitted regression
 #' @return A ggplot object
-#' @examples gg_resfitted()
+#' @examples library(MASS)
+#' data(Cars93)
+#' cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+#' gg_resfitted(cars_lm)
 #' 
 #' @export
 #' 

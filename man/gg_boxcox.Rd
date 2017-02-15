@@ -20,6 +20,10 @@ A ggplot object that contains boxcox graph
 Plot boxcox graph in ggplot with suggested lambda transformation and 95% confidence level.
 }
 \examples{
-gg_boxcox()
+library(MASS)
+data(Cars93)
+cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+gg_boxcox(cars_lm)
+
 }
 

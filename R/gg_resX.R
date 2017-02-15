@@ -11,7 +11,18 @@
 #' @return A list of ggplot objects that contains residual plot
 #' of residuals against predictor values
 #' @examples gg_resX()
-#' 
+#' library(MASS)
+#' data(Cars93)
+#' # a regression with categorical variable
+#' cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM + Origin, data = Cars93)
+#' gg_resX(cars_lm, data = Cars93)
+#' # customize which diagnostic plot is included by have gg_resX to return a list of plots
+#' plots <- gg_resX(cars_lm, data = Cars93, plotAll = FALSE)
+#' names(plots)     # get name of the plots
+#' exclude_plots <- plots[-1 ]    #exclude certain residual plots
+#' include_plots <- plots[1]      # include certain residual plots
+#' plot_all(exclude_plots)              # make use of plot_all() in lindia
+#' plot_all(include_plots)
 #' @export
 gg_resX <- function(lm_object, data = NULL, select = NULL, plotAll = TRUE){
    

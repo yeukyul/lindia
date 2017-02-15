@@ -29,6 +29,17 @@ A ggplot object that contains residual vs. leverage graph
 Plot all diagnostic plots given fitted linear regression line.
 }
 \examples{
-gg_diagnose()
+library(MASS)
+data(Cars93)
+# a regression with categorical variable
+cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM + Origin, data = Cars93)
+gg_diagnose(cars_lm, data = Cars93)
+# customize which diagnostic plot is included
+plots <- gg_diagnose(cars_lm, data = Cars93, plotAll = FALSE)
+names(plots)     # get name of the plots
+exclude_plots <- plots[-c(1, 3) ]    #exclude certain diagnostics plots
+include_plots <- plots[c(1, 3)]      # include certain diagnostics plots
+plot_all(exclude_plots)              # make use of plot_all() in lindia
+plot_all(include_plots)
 }
 

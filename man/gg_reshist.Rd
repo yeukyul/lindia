@@ -18,7 +18,11 @@ A ggplot object
 Generate histogram of residuals in ggplot.
 }
 \examples{
-gg_reshist()
-
+library(MASS)
+data(Cars93)
+cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+gg_reshist(cars_lm)
+# specify number of bins
+gg_reshist(cars_lm. bins = 20)
 }
 

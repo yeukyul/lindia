@@ -7,7 +7,10 @@
 #'          eg. "lm", "glm", "gam", "loess", "rlm". See \url{http://docs.ggplot2.org/current/geom_smooth.html}
 #'          for more details.
 #' @return A ggplot object that contains residual vs. leverage graph 
-#' @examples gg_resleverage()
+#' @examples library(MASS)
+#' data(Cars93)
+#' cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+#' gg_resleverage(cars_lm)
 #' @export
 gg_resleverage <- function(lm_object, method = "loess") {
    

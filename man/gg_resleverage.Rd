@@ -20,6 +20,9 @@ A ggplot object that contains residual vs. leverage graph
 Plot residual versus leverage plot in ggplot.
 }
 \examples{
-gg_resleverage()
+library(MASS)
+data(Cars93)
+cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+gg_resleverage(cars_lm)
 }
 

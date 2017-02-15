@@ -11,7 +11,19 @@
 #' @param exclude specify diagnostic plots to exclude, will plot all if both include and exclude are passed in.
 #' @param include specify diagnostic plots to include, will plot all if both include and exclude are passed in.
 #' @return A ggplot object that contains residual vs. leverage graph 
-#' @examples gg_diagnose()
+#' @examples
+#' library(MASS)
+#' data(Cars93)
+#' # a regression with categorical variable
+#' cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM + Origin, data = Cars93)
+#' gg_diagnose(cars_lm, data = Cars93)
+#' # customize which diagnostic plot is included
+#' plots <- gg_diagnose(cars_lm, data = Cars93, plotAll = FALSE)
+#' names(plots)     # get name of the plots
+#' exclude_plots <- plots[-c(1, 3) ]    #exclude certain diagnostics plots
+#' include_plots <- plots[c(1, 3)]      # include certain diagnostics plots
+#' plot_all(exclude_plots)              # make use of plot_all() in lindia
+#' plot_all(include_plots)
 #' @export
 gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL, include = NULL, exclude = NULL, data = NULL, 
                         plotAll = TRUE) {

@@ -16,6 +16,9 @@ A qqplot with fitted qqline
 Plot quantile-quantile plot (QQPlot) in ggplot with qqline shown.
 }
 \examples{
-gg_qqplot()
+library(MASS)
+data(Cars93)
+cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+gg_scalelocation(cars_lm)
 }
 

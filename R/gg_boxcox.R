@@ -6,7 +6,11 @@
 #' @param showlambda logical which controls whether lambda value should be displayed on graph. Defaults to TRUE
 #' @param lambdaSF controls to how many significant figure is lambda rounded to. Defaults to 3.
 #' @return A ggplot object that contains boxcox graph
-#' @examples gg_boxcox()
+#' @examples library(MASS)
+#' data(Cars93)
+#' cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+#' gg_boxcox(cars_lm)
+#' 
 #' @export
 gg_boxcox <- function(lm_object, showlambda = TRUE, lambdaSF = 3){
 
