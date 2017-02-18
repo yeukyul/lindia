@@ -4,10 +4,10 @@
 \alias{gg_qqplot}
 \title{Plot quantile-quantile plot (QQPlot) in ggplot with qqline shown.}
 \usage{
-gg_qqplot(lm_object)
+gg_qqplot(fitted.lm)
 }
 \arguments{
-\item{lm}{lm object that contains regression}
+\item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
 }
 \value{
 A qqplot with fitted qqline
@@ -18,7 +18,7 @@ Plot quantile-quantile plot (QQPlot) in ggplot with qqline shown.
 \examples{
 library(MASS)
 data(Cars93)
-cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 gg_qqplot(cars_lm)
 }
 

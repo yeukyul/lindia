@@ -4,14 +4,14 @@
 \alias{gg_boxcox}
 \title{Plot boxcox graph in ggplot with suggested lambda transformation}
 \usage{
-gg_boxcox(lm_object, showlambda = TRUE, lambdaSF = 3)
+gg_boxcox(fitted.lm, showlambda = TRUE, lambdaSF = 3)
 }
 \arguments{
-\item{showlambda}{logical which controls whether lambda value should be displayed on graph. Defaults to TRUE}
+\item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
 
-\item{lambdaSF}{controls to how many significant figure is lambda rounded to. Defaults to 3.}
+\item{showlambda}{logical; controls whether lambda value should be displayed on graph. Defaults to TRUE}
 
-\item{lm}{lm object that contains fitted regression}
+\item{lambdaSF}{numeric; controls to how many significant figure is lambda rounded to. Defaults to 3.}
 }
 \value{
 A ggplot object that contains boxcox graph
@@ -22,7 +22,7 @@ Plot boxcox graph in ggplot with suggested lambda transformation
 \examples{
 library(MASS)
 data(Cars93)
-cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 gg_boxcox(cars_lm)
 
 }

@@ -1,18 +1,18 @@
 
 #' Generate residual plot of residuals against predictors
 #'
-#' @param fitted.lm a fitted linear model (i.e. lm, glm) that contains fitted regression
+#' @param lm_object a fitted linear model (i.e. lm, glm) that contains fitted regression
+#' @param data original dataset
 #' @param plotAll boolean value to determine whether plot will be return as 
 #' a plot arranged using `grid.arrange()`. When set to false, the function
 #' would return a list of residual plots. Parameter defaults to TRUE.
-#' @return An arranged grid of residuals against predictor values plots in ggplot. 
-#' If plotall is set to FALSE,  a list of ggplot objects will be returned instead. 
-#' Name of the plots are set to respective variable names.
-#' @examples 
+#' @return A list of ggplot objects that contains residual plot
+#' of residuals against predictor values
+#' @examples gg_resX()
 #' library(MASS)
 #' data(Cars93)
 #' # a regression with categorical variable
-#' cars_lm <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
+#' cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM + Origin, data = Cars93)
 #' gg_resX(cars_lm, data = Cars93)
 #' # customize which diagnostic plot is included by have gg_resX to return a list of plots
 #' plots <- gg_resX(cars_lm, data = Cars93, plotAll = FALSE)
@@ -22,15 +22,15 @@
 #' plot_all(exclude_plots)              # make use of plot_all() in lindia
 #' plot_all(include_plots)
 #' @export
-gg_resX <- function(fitted.lm, plotAll = TRUE){
+gg_resX <- function(lm_object, plotAll = TRUE){
    
-   handle_exception(fitted.lm, "gg_resX")
+   handle_exception(lm_object, "gg_resX")
    
    # extract model matrix
-   lm_matrix = fortify(fitted.lm)
+   lm_matrix = fortify(lm_object)
    
    # extract relevant explanatory variables in model matrix
-   var_names = get_varnames(fitted.lm)$predictor
+   var_names = get_varnames(lm_object)$predictor
    dim = length(var_names)
    
    # create a list to hold all residual plots
@@ -41,7 +41,7 @@ gg_resX <- function(fitted.lm, plotAll = TRUE){
    
    for (i in 1:length(var_names)){
       var = var_names[i]
-      this_plot <- get_resplot(var, lm_matrix, fitted.lm)
+      this_plot <- get_resplot(var, lm_matrix, lm_object)
       if (!is.null(this_plot)) {
          plots[[n]] <- this_plot
          n = n + 1
@@ -49,10 +49,9 @@ gg_resX <- function(fitted.lm, plotAll = TRUE){
       
    }
    
-   # rename the plots
    names(plots) = var_names
    
-   # determine to plot the plots, or return a list of plots
+   
    if (plotAll) {
       nCol = get_ncol(dim)
       return (do.call("grid.arrange", c(plots, ncol = nCol)))
@@ -65,19 +64,19 @@ gg_resX <- function(fitted.lm, plotAll = TRUE){
 
 
 #
-# get_resplot - returns a ggplot object of residuals in fitted.lm against var in lm_matrix
+# get_resplot - returns a ggplot object of residuals in lm_object against var in lm_matrix
 #
 # input : var - variable name string the residual plot is about
 #         lm_matrix - model matrix of the fitted lm
-#        fitted.lm : fitted lm
+#        lm_object : fitted lm
 #        data : original dataset (optional)
 #
 # output : a ggplot object of var vs. residual of fitted lm
 #
-get_resplot <- function(var, lm_matrix, fitted.lm){
+get_resplot <- function(var, lm_matrix, lm_object){
    
    # to center residual plot around y = 0 line
-   res = residuals(fitted.lm)
+   res = residuals(lm_object)
    limit = max(abs(res))
    margin_factor = 5
    margin = round(limit / margin_factor)
@@ -87,18 +86,17 @@ get_resplot <- function(var, lm_matrix, fitted.lm){
    # handle categorical and continuous variables
    x = lm_matrix[, var]
    
-   # continuous variable: return scatterplot
+   # handle numeric variable
    if (is.numeric(x)) {
-      return (ggplot(data = fitted.lm, aes(x = lm_matrix[, var], y = fitted.lm$residuals)) + 
+      return (ggplot(data = lm_object, aes(x = lm_matrix[, var], y = lm_object$residuals)) + 
                  labs(x = var, y = "residuals") + 
                  ggtitle(paste("Residual vs.", var)) + 
                  geom_point() +
                  geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3") +
                  ylim(-(limit + margin), limit + margin))
    }
-   # categorical variable: return boxplot
    else {
-      base_plot = ggplot(data = data.frame(lm_matrix), aes(x = lm_matrix[, var], y = fitted.lm$residuals)) + 
+      base_plot = ggplot(data = data.frame(lm_matrix), aes(x = lm_matrix[, var], y = lm_object$residuals)) + 
          labs(x = var, y = "residuals") + 
          ggtitle(paste("Residual vs.", var)) + 
          geom_boxplot()

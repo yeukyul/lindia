@@ -1,22 +1,22 @@
 
 #' Generate residual plot of residuals against fitted value
 #'
-#' @param lm lm object that contains a fitted regression
+#' @param fitted.lm a fitted linear model (i.e. lm, glm) that contains fitted regression
 #' @return A ggplot object
 #' @examples library(MASS)
 #' data(Cars93)
-#' cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+#' cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 #' gg_resfitted(cars_lm)
 #' 
 #' @export
 #' 
-gg_resfitted <- function(lm_object) {
+gg_resfitted <- function(fitted.lm) {
    
-   handle_exception(lm_object, "gg_resfitted")
+   handle_exception(fitted.lm, "gg_resfitted")
    
-   #obtain residual and fitted values from lm_object
-   res = residuals(lm_object)
-   fitted_values = fitted(lm_object)
+   #obtain residual and fitted values from fitted.lm
+   res = residuals(fitted.lm)
+   fitted_values = fitted(fitted.lm)
    
    # to center residual plot around y = 0 line
    limit = max(abs(res))

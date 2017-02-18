@@ -3,19 +3,19 @@
 #' Plot all diagnostic plots given fitted linear regression line.
 #'
 #' @param lm lm object that contains fitted regression
-#' @param theme A graphing style to apply to all plots. Default to null.
+#' @param theme ggplot graphing style using `ggplot::theme()`. A ggplot graphing style to apply to all plots. Default to null.
 #' @param ncol specify number of columns in resulting plot. Default to make a square matrix of the output.
-#' @param plotAll boolean value to determine whether plot will be return as 
-#' a plot arranged using `grid.arrange()`. When set to false, the function
-#' would return a list of diagnostic plots. Parameter defaults to TRUE.
-#' @param exclude specify diagnostic plots to exclude, will plot all if both include and exclude are passed in.
-#' @param include specify diagnostic plots to include, will plot all if both include and exclude are passed in.
-#' @return A ggplot object that contains residual vs. leverage graph 
+#' @param plotAll logical; determine whether plot will be returned as 
+#' an arranged grid. When set to false, the function
+#' will return a list of diagnostic plots. Parameter defaults to TRUE.
+#' @return An arranged grid of linear model diagnostics plots in ggplot. 
+#' If plotall is set to FALSE, a list of ggplot objects will be returned instead. 
+#' Name of the plots are set to respective variable names.
 #' @examples
 #' library(MASS)
 #' data(Cars93)
 #' # a regression with categorical variable
-#' cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM + Origin, data = Cars93)
+#' cars_lm <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
 #' gg_diagnose(cars_lm, data = Cars93)
 #' # customize which diagnostic plot is included
 #' plots <- gg_diagnose(cars_lm, data = Cars93, plotAll = FALSE)
@@ -25,14 +25,13 @@
 #' plot_all(exclude_plots)              # make use of plot_all() in lindia
 #' plot_all(include_plots)
 #' @export
-gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL, include = NULL, exclude = NULL, data = NULL, 
-                        plotAll = TRUE) {
+gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE) {
    
-   handle_exception(lm_object, "gg_diagnose")
+   handle_exception(fitted.lm, "gg_diagnose")
    
    # compute total number of diagnostic plots
-   n_plots = length(get_varnames(lm_object)[[1]])
-   n_plots = n_plots + 6
+   n_plots = length(get_varnames(fitted.lm)[[1]])
+   n_plots = n_plots + 7
    
    # compute the best dimension for resulting plot
    if (!is.null(include)) {
@@ -51,14 +50,14 @@ gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL, include = NULL, ex
    
    plots = list()
    # get all plots
-   # !!!! not implemented: should ignore plots that cannot be generated
-   plots[["residual_hist"]] <- gg_reshist(lm_object)
-   plots = append(plots, gg_resX(lm_object, data = data, plotAll = FALSE))
-   plots[["res_fitted"]] <- gg_resfitted(lm_object)
-   plots[["gg_qqplot"]] <- gg_qqplot(lm_object)
-   plots[["gg_boxcox"]] <- gg_boxcox(lm_object)
-   plots[["gg_scalelocation"]] <- gg_scalelocation(lm_object)
-   plots[["gg_resleverage"]] <- gg_resleverage(lm_object)
+   plots[["residual_hist"]] <- gg_reshist(fitted.lm)
+   plots = append(plots, gg_resX(fitted.lm, plotAll = FALSE))
+   plots[["res_fitted"]] <- gg_resfitted(fitted.lm)
+   plots[["qqplot"]] <- gg_qqplot(fitted.lm)
+   plots[["boxcox"]] <- gg_boxcox(fitted.lm)
+   plots[["scalelocation"]] <- gg_scalelocation(fitted.lm)
+   plots[["resleverage"]] <- gg_resleverage(fitted.lm)
+   ploits[["cooksd"]] <- gg_cooksd(fitted.lm)
    
    # apply style to all the plots
    if (!(is.null(theme))) {
@@ -66,7 +65,7 @@ gg_diagnose <- function(lm_object, theme = NULL, ncol = NULL, include = NULL, ex
    }
    
    if (plotAll) {
-      return (do.call("grid.arrange", c(plots, ncol = nCol)))
+      return (do.call("gridExtra::grid.arrange", c(plots, ncol = nCol)))
    }
    else {
       return(plots)

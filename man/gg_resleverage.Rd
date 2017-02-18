@@ -4,14 +4,14 @@
 \alias{gg_resleverage}
 \title{Plot residual versus leverage plot in ggplot.}
 \usage{
-gg_resleverage(lm_object, method = "loess")
+gg_resleverage(fitted.lm, method = "loess")
 }
 \arguments{
+\item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
+
 \item{method}{smoothing method of fitted line on scale-location plot. 
 eg. "lm", "glm", "gam", "loess", "rlm". See \url{http://docs.ggplot2.org/current/geom_smooth.html}
 for more details.}
-
-\item{lm}{lm object that contains fitted regression}
 }
 \value{
 A ggplot object that contains residual vs. leverage graph
@@ -22,7 +22,7 @@ Plot residual versus leverage plot in ggplot.
 \examples{
 library(MASS)
 data(Cars93)
-cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 gg_resleverage(cars_lm)
 }
 

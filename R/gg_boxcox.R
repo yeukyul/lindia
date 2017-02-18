@@ -2,22 +2,22 @@
 
 #' Plot boxcox graph in ggplot with suggested lambda transformation
 #'
-#' @param lm lm object that contains fitted regression
-#' @param showlambda logical which controls whether lambda value should be displayed on graph. Defaults to TRUE
-#' @param lambdaSF controls to how many significant figure is lambda rounded to. Defaults to 3.
+#' @param fitted.lm a fitted linear model (i.e. lm, glm) that contains fitted regression
+#' @param showlambda logical; controls whether lambda value should be displayed on graph. Defaults to TRUE
+#' @param lambdaSF numeric; controls to how many significant figure is lambda rounded to. Defaults to 3.
 #' @return A ggplot object that contains boxcox graph
 #' @examples library(MASS)
 #' data(Cars93)
-#' cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+#' cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 #' gg_boxcox(cars_lm)
 #' 
 #' @export
-gg_boxcox <- function(lm_object, showlambda = TRUE, lambdaSF = 3){
+gg_boxcox <- function(fitted.lm, showlambda = TRUE, lambdaSF = 3){
 
-   handle_exception(lm_object, "gg_boxcox")
+   handle_exception(fitted.lm, "gg_boxcox")
 
    # compute boxcox graph points
-   boxcox_object <- boxcox(lm_object, plotit = FALSE)
+   boxcox_object <- boxcox(fitted.lm, plotit = FALSE)
 
    # create new dataframe to hold all x and y points
    x <- unlist(boxcox_object$x)

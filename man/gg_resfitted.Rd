@@ -4,10 +4,10 @@
 \alias{gg_resfitted}
 \title{Generate residual plot of residuals against fitted value}
 \usage{
-gg_resfitted(lm_object)
+gg_resfitted(fitted.lm)
 }
 \arguments{
-\item{lm}{lm object that contains a fitted regression}
+\item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
 }
 \value{
 A ggplot object
@@ -18,7 +18,7 @@ Generate residual plot of residuals against fitted value
 \examples{
 library(MASS)
 data(Cars93)
-cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 gg_resfitted(cars_lm)
 
 }

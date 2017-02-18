@@ -4,12 +4,12 @@
 \alias{gg_reshist}
 \title{Generate histogram of residuals in ggplot.}
 \usage{
-gg_reshist(lm_object, bins = NULL)
+gg_reshist(fitted.lm, bins = NULL)
 }
 \arguments{
-\item{bins}{bin size for histogram}
+\item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
 
-\item{lm}{lm object that contains a fitted regression}
+\item{bins}{bin size for histogram}
 }
 \value{
 A ggplot object
@@ -20,7 +20,7 @@ Generate histogram of residuals in ggplot.
 \examples{
 library(MASS)
 data(Cars93)
-cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+cars_lm <- lm(Price~ Passengers + Length + RPM, data = Cars93)
 gg_reshist(cars_lm)
 # specify number of bins
 gg_reshist(cars_lm. bins = 20)
