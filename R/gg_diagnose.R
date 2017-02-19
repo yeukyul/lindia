@@ -58,7 +58,7 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE) {
    }
    
    if (plotAll) {
-      return (do.call("gridExtra::grid.arrange", c(plots, ncol = nCol)))
+      return (do.call("grid.arrange", c(plots, ncol = nCol)))
    }
    else {
       return(plots)
