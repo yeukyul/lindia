@@ -34,14 +34,7 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE) {
    n_plots = n_plots + 7
    
    # compute the best dimension for resulting plot
-   if (!is.null(include)) {
-      nCol = get_ncol(length(include))
-      n_plot = length(include)
-   }
-   else if (!is.null(exclude)) {
-      nCol = n_plot - length(exclude)
-   }
-   else if (is.null(ncol)) {
+   if (is.null(ncol)) {
       nCol = get_ncol(n_plots)
    }
    else {
