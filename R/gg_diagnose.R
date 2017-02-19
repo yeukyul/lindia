@@ -50,7 +50,7 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE) {
    plots[["boxcox"]] <- gg_boxcox(fitted.lm)
    plots[["scalelocation"]] <- gg_scalelocation(fitted.lm)
    plots[["resleverage"]] <- gg_resleverage(fitted.lm)
-   ploits[["cooksd"]] <- gg_cooksd(fitted.lm)
+   plots[["cooksd"]] <- gg_cooksd(fitted.lm)
    
    # apply style to all the plots
    if (!(is.null(theme))) {
