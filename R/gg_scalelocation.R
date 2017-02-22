@@ -13,6 +13,7 @@
 #' cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 #' gg_scalelocation(cars_lm)
 #' @export
+#' 
 gg_scalelocation <- function(fitted.lm, method = 'loess', scale.factor = 1, se = FALSE) {
    
    handle_exception(fitted.lm, "gg_scalelocation")
