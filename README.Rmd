@@ -20,9 +20,9 @@ data(Cars93)
 
 #lindia
 
-lindia is an extention to ***ggplot2** to provide streamlined plotting features of linear diagnostic plots (including `lm()` and `glm()`). The following demonstrates basic plotting features of `lindia`. All functions in `lindia` takes in an lm object and return linear diagnostic plots in types of `ggplot`. The following code demonstrates how you can create a simple linear model from `Cars93` dataset, then use a call to `lindia::gg_diagnose` to visualize overall features of the distribution.
+lindia is an extention to **ggplot2** to provide streamlined plotting features of linear diagnostic plots (including `lm()` and `glm()`). The following demonstrates basic plotting features of `lindia`. All functions in `lindia` takes in an lm object and return linear diagnostic plots in types of `ggplot`. The following code demonstrates how you can create a simple linear model from `Cars93` dataset, then use a call to `lindia::gg_diagnose` to visualize overall features of the distribution.
 
-```{r, warning = F, message = F, fig.width = 12, fig.height = 7}
+```{r, warning = F, message = F, fig.width = 12, fig.height = 8}
 # create linear model
 cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 
@@ -46,7 +46,7 @@ Followed are functions implemented in `lindia`:
 + [`gg_scalelocation()`](# gg_scalelocation): scale-location plot (also called spread-location plot).
 + [`gg_resleverage()`](# gg_resleverage): residual vs. leverage plot. (cook distance indicators not implemented for now)
 + [`gg_diagnose()`](# gg_diagnose): all diagnostic plots being layed out on a grid (not functional yet).
-+ ['gg_cooksd()`](#gg_cooksd): cook's distance plot with potential outliars labeled on top
++ [`gg_cooksd()`](#gg_cooksd): cook's distance plot with potential outliars labeled on top
 
 `gg_resX()` and `gg_diagnose()` would return multiple plots after a call to the function. By default, they would return one aggregate plot of all diagnostic plots as one arranged grid. If user needs more flexibility in determining graphical elements and inclusion/exclustion of certain plots, set `plotAll` parameter in the function call to `FALSE`. It will return a list of all plots,\ which user can manipulate. 
 
@@ -61,18 +61,17 @@ include_plots <- plots[c(1, 3)]      # include certain diagnostics plots
 
 
 In addition, `lindia` provides a `plot_all()` feature that allows users pass in a list of plots and output as a formatted grid of plots using `grid.arrange()` in `gridExtra`.
-```{r, warning = F, message = F}
+```{r, warning = F, message = F, fig.width = 12, fig.height = 8}
 plot_all(exclude_plots)
 ```
 
-All graphical styles returned by lindia graphing function can be overwritten by a call to `ggplot::theme()" (except `gg_resX()` and `gg_diagnose()`, which would return a list rather than a single ggplot object).
+All graphical styles returned by lindia graphing function can be overwritten by a call to `ggplot::theme()` (except `gg_resX()` and `gg_diagnose()`, which would return a list rather than a single ggplot object).
 ```{r, warning = F, message = F}
 gg_resfitted(cars_lm) + theme_bw()
 ```
 
 #Functions in Lindia
 
----
 
 The following gives a brief demonstration of how to use the functions provided in `lindia`.
 
@@ -113,7 +112,7 @@ gg_resfitted(cars_lm)
 ```
 
 
-##gg_qqplot
+#gg_qqplot
 
 Plots quantile quantile plot of a linear model, with qqline overlayed on top.
 
@@ -156,13 +155,13 @@ gg_cooksd(cars_lm)
 
 #gg_diagnose
 
-An aggregate plot of all diagnostics plots, layed out in one panel as demonstrated in the beginning of read me. User can set `theme` parameter to a specific theme type to apply to all plots in the panel.
+An aggregate plot of all diagnostics plots, layed out on one panel as demonstrated in the beginning of this read me document. User can set `theme` parameter to a specific theme type in order to apply to all plots in the panel.
 
-```{r, warning = F, message = F, fig.width = 12, fig.height = 7}
+```{r, warning = F, message = F, fig.width = 12, fig.height = 8}
 gg_diagnose(cars_lm_2, theme = theme_bw())
 ```
 
-If user set `plotAll` parameter to false, gg_diagnose would return a list of ggplot objects which user can manipulate.
+If user set `plotAll` parameter to false, `gg_diagnose` would return a list of ggplot objects which user can manipulate.
 
 #Package Dependency
 
