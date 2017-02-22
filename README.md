@@ -185,10 +185,10 @@ gg_diagnose(cars_lm_2, theme = theme_bw())
 
 ![](figures/README-unnamed-chunk-16-1.png)
 
-If user set `plotAll` parameter to false, `gg_diagnose` would return a list of ggplot objects which user can manipulate. `lindia` also provides a handy trick that allows user to scale all point sizes and linewidth at once, using the parameter `scale.factor`.
+If user set `plotAll` parameter to false, `gg_diagnose` would return a list of ggplot objects which user can manipulate. `lindia` also provides a handy trick that allows user to scale all point sizes and linewidth at once, using the parameter `scale.factor`. Followed is an extreme example by setting `scale.factor` to 0.3.
 
 ``` r
-gg_diagnose(cars_lm_2, scale.factor = 2)
+gg_diagnose(cars_lm_2, scale.factor = 0.3)
 ```
 
 ![](figures/README-unnamed-chunk-17-1.png)
