@@ -8,6 +8,7 @@
 #' @param plotAll logical; determine whether plot will be returned as 
 #' an arranged grid. When set to false, the function
 #' will return a list of diagnostic plots. Parameter defaults to TRUE.
+#' @param scale.factor numeric; scales the point size, linewidth, labels in all diagnostic plots to allow optimal viewing. Defaults to 1.
 #' @return An arranged grid of linear model diagnostics plots in ggplot. 
 #' If plotall is set to FALSE, a list of ggplot objects will be returned instead. 
 #' Name of the plots are set to respective variable names.
@@ -25,7 +26,7 @@
 #' plot_all(exclude_plots)              # make use of plot_all() in lindia
 #' plot_all(include_plots)
 #' @export
-gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE) {
+gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE, scale.factor = 1) {
    
    handle_exception(fitted.lm, "gg_diagnose")
    

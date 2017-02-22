@@ -20,11 +20,11 @@ data(Cars93)
 
 #lindia
 
-lindia is an extention to ***ggplot2*** to provide streamlined plotting features of linear diagnostic plots. The following demonstrates basic plotting features of `lindia`. All functions in `lindia` takes in an lm object and return linear diagnostic plots in types of `ggplot`. The following code demonstrates how you can create a simple linear model from `Cars93` dataset, then use a call to `lindia::gg_diagnose` to visualize overall features of the distribution.
+lindia is an extention to ***ggplot2** to provide streamlined plotting features of linear diagnostic plots (including `lm()` and `glm()`). The following demonstrates basic plotting features of `lindia`. All functions in `lindia` takes in an lm object and return linear diagnostic plots in types of `ggplot`. The following code demonstrates how you can create a simple linear model from `Cars93` dataset, then use a call to `lindia::gg_diagnose` to visualize overall features of the distribution.
 
 ```{r, warning = F, message = F, fig.width = 12, fig.height = 7}
 # create linear model
-cars_lm <- lm(Rev.per.mile ~ Passengers + Length + RPM, data = Cars93)
+cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 
 # visualize diagnostic plots with a call to lindia
 gg_diagnose(cars_lm)
@@ -38,14 +38,15 @@ gg_diagnose(cars_lm)
 #Overview
 Followed are functions implemented in `lindia`:
 
-+ [`gg_reshist()`](# gg_reshist): plotting the histogram of distribution of residuals
-+ [`gg_resfitted()`](# gg_resfitted): residual plot of residuals by fitted value
++ [`gg_reshist()`](#gg_reshist): plotting the histogram of distribution of residuals
++ [`gg_resfitted()`](#gg_resfitted): residual plot of residuals by fitted value
 + [`gg_resX()`](# gg_resX): a list of residual plots of all predictors by fitted value (continuous variables only for now. Categorical and interaction terms are developing.)
 + [`gg_qqplot()`](# gg_qqplot): Normaility quantile-quantile plot (QQPlot) with qqline overlayed on top
 + [`gg_boxcox()`](# gg_boxcox): boxcox graph with optimal transformation labeled on graph
 + [`gg_scalelocation()`](# gg_scalelocation): scale-location plot (also called spread-location plot).
 + [`gg_resleverage()`](# gg_resleverage): residual vs. leverage plot. (cook distance indicators not implemented for now)
 + [`gg_diagnose()`](# gg_diagnose): all diagnostic plots being layed out on a grid (not functional yet).
++ ['gg_cooksd()`](#gg_cooksd): cook's distance plot with potential outliars labeled on top
 
 `gg_resX()` and `gg_diagnose()` would return multiple plots after a call to the function. By default, they would return one aggregate plot of all diagnostic plots as one arranged grid. If user needs more flexibility in determining graphical elements and inclusion/exclustion of certain plots, set `plotAll` parameter in the function call to `FALSE`. It will return a list of all plots,\ which user can manipulate. 
 
@@ -89,10 +90,10 @@ gg_reshist(cars_lm, bins = 20)
 
 #gg_resX
 
-Plots residual plots of all predictors vs. residuals and return all plots as one plot that is arranged by package `gridExtra`. If a variable is continuous, it would be plotted as scatterplot.  If a given variable is category is categorical, lindia would plot boxplot for that variable. ***User have to pass in original dataset as data parameter for the boxplots to show, otherwise lindia would ignore plot.***
+Plots residual plots of all predictors vs. residuals and return all plots as one plot that is arranged by package `gridExtra`. If a variable is continuous, it would be plotted as scatterplot.  If a given variable is category is categorical, lindia would plot boxplot for that variable.
 ```{r, warning = F, message = F}
 cars_lm_2 <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
-gg_resX(cars_lm, data = Cars93)
+gg_resX(cars_lm)
 ```
 
 
@@ -100,7 +101,7 @@ gg_resX(cars_lm, data = Cars93)
 
 ```{r, warning = F, message = F}
 cars_lm_inter <- lm(Price ~ Passengers * Length, data = Cars93)
-gg_resX(cars_lm_inter, data = Cars93)
+gg_resX(cars_lm_inter)
 ```
 
 
@@ -144,13 +145,21 @@ Plots residual vs. leverage of data points to detect outliers using cook's dista
 gg_resleverage(cars_lm)
 ```
 
+#gg_cooksd
+
+Plots residual vs. leverage of data points to detect outliers using cook's distance.
+
+```{r, warning = F, message = F}
+gg_cooksd(cars_lm)
+```
+
 
 #gg_diagnose
 
-An aggregate plot of all diagnostics plots, layed out in one panel as demonstrated in the beginning of read me. User can set `theme` parameter to a specific theme type to apply to all plots in the panel. Notice that same as [`gg_resX`](# gg_resX), user would have to pass in original dataset of the lm_object in order for residual plots of categorical variables to be plotted.
+An aggregate plot of all diagnostics plots, layed out in one panel as demonstrated in the beginning of read me. User can set `theme` parameter to a specific theme type to apply to all plots in the panel.
 
 ```{r, warning = F, message = F, fig.width = 12, fig.height = 7}
-gg_diagnose(cars_lm_2, theme = theme_bw(), data = Cars93)
+gg_diagnose(cars_lm_2, theme = theme_bw())
 ```
 
 If user set `plotAll` parameter to false, gg_diagnose would return a list of ggplot objects which user can manipulate.

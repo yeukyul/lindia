@@ -12,3 +12,4 @@ export(gg_scalelocation)
 export(plot_all)
 import(ggplot2)
 importFrom(gridExtra, grid.arrange)
+

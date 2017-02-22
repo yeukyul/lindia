@@ -4,7 +4,8 @@
 \alias{gg_diagnose}
 \title{Plot all diagnostic plots given fitted linear regression line.}
 \usage{
-gg_diagnose(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE)
+gg_diagnose(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE,
+  scale.factor = 1)
 }
 \arguments{
 \item{theme}{ggplot graphing style using `ggplot::theme()`. A ggplot graphing style to apply to all plots. Default to null.}
@@ -14,6 +15,8 @@ gg_diagnose(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE)
 \item{plotAll}{logical; determine whether plot will be returned as 
 an arranged grid. When set to false, the function
 will return a list of diagnostic plots. Parameter defaults to TRUE.}
+
+\item{scale.factor}{numeric; scales the point size, linewidth, labels in all diagnostic plots to allow optimal viewing. Defaults to 1.}
 
 \item{lm}{lm object that contains fitted regression}
 }
