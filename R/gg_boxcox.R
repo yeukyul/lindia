@@ -5,6 +5,7 @@
 #' @param fitted.lm a fitted linear model (i.e. lm, glm) that contains fitted regression
 #' @param showlambda logical; controls whether lambda value should be displayed on graph. Defaults to TRUE
 #' @param lambdaSF numeric; controls to how many significant figure is lambda rounded to. Defaults to 3.
+#' @param scale.factor numeric; scales the point size and linewidth to allow customized viewing. Defaults to 1.
 #' @return A ggplot object that contains boxcox graph
 #' @examples library(MASS)
 #' data(Cars93)
@@ -12,7 +13,7 @@
 #' gg_boxcox(cars_lm)
 #' 
 #' @export
-gg_boxcox <- function(fitted.lm, showlambda = TRUE, lambdaSF = 3){
+gg_boxcox <- function(fitted.lm, showlambda = TRUE, lambdaSF = 3, scale.factor = 1){
 
    handle_exception(fitted.lm, "gg_boxcox")
 
@@ -42,20 +43,20 @@ gg_boxcox <- function(fitted.lm, showlambda = TRUE, lambdaSF = 3){
    conf_hi <- round(max(accept_range), lambdaSF)
 
    plot <- ggplot(data = boxcox_unlist) +
-      geom_segment(aes(x = xstart, y = ystart, xend = xend, yend = yend)) +
+      geom_segment(aes(x = xstart, y = ystart, xend = xend, yend = yend), size = scale.factor) +
       labs(x = "lambda", y = "log-likelihood") +
       ggtitle("Boxcox Plot") +
-      geom_vline(xintercept = best_lambda, linetype = "dotted") +
-      geom_vline(xintercept = conf_lo, linetype = "dotted") +
-      geom_vline(xintercept = conf_hi, linetype = "dotted") +
-      geom_hline(yintercept = y[min(accept_inds)], linetype = "dotted")
+      geom_vline(xintercept = best_lambda, linetype = "dotted", size = scale.factor/2) +
+      geom_vline(xintercept = conf_lo, linetype = "dotted", size = scale.factor/2) +
+      geom_vline(xintercept = conf_hi, linetype = "dotted", size = scale.factor/2) +
+      geom_hline(yintercept = y[min(accept_inds)], linetype = "dotted", size = scale.factor/2)
 
    # add label if show lambda range
    if (showlambda) {
       return(plot +
-                geom_text(aes(x = best_lambda, label = as.character(rounded_lambda), y = min_y), color = "indianred3") +
-                geom_text(aes(x = conf_lo, label = as.character(conf_lo), y = min_y)) +
-                geom_text(aes(x = conf_hi, label = as.character(conf_hi), y = min_y)))
+                geom_text(aes(x = best_lambda, label = as.character(rounded_lambda), y = min_y)) +
+                geom_text(aes(x = conf_lo, label = as.character(conf_lo), y = min_y), color = "indianred3") +
+                geom_text(aes(x = conf_hi, label = as.character(conf_hi), y = min_y), color = "indianred3"))
    }
    else {
       return (plot)

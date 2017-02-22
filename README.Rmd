@@ -161,7 +161,12 @@ An aggregate plot of all diagnostics plots, layed out on one panel as demonstrat
 gg_diagnose(cars_lm_2, theme = theme_bw())
 ```
 
-If user set `plotAll` parameter to false, `gg_diagnose` would return a list of ggplot objects which user can manipulate.
+If user set `plotAll` parameter to false, `gg_diagnose` would return a list of ggplot objects which user can manipulate. `lindia` also provides a handy trick that allows user to scale all point sizes and linewidth at once, using the parameter `scale.factor`.
+
+```{r, warning = F, message = F, fig.width = 12, fig.height = 8}
+gg_diagnose(cars_lm_2, scale.factor = 2)
+```
+
 
 #Package Dependency
 

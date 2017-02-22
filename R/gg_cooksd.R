@@ -6,6 +6,7 @@
 #' Default to TRUE.
 #' @param threshold string; determining the cut off label of cook's distance. Choices are 
 #' "baseR" (0.5 and 1), "matlab" (mean(cooksd)*3), and "convention" (4/n and 1). Default to "convention".
+#' @param scale.factor numeric; scales the point size and linewidth to allow customized viewing. Defaults to 1.
 #' @param show.threshold logical; determine whether or not threshold line is to be shown. Default to TRUE.
 #' @return A ggplot object that contains a cook's distance plot
 #' @examples library(MASS)
@@ -14,7 +15,7 @@
 #' gg_cooksd(cars_lm)
 #' 
 #' @export
-gg_cooksd <- function(fitted.lm, label = TRUE, show.threshold = TRUE, threshold = "convention") {
+gg_cooksd <- function(fitted.lm, label = TRUE, show.threshold = TRUE, threshold = "convention", scale.factor = 1) {
    
    handle_exception(fitted.lm, "gg_cooksd")
    
@@ -47,8 +48,8 @@ gg_cooksd <- function(fitted.lm, label = TRUE, show.threshold = TRUE, threshold 
    max_cook = limit + margin
    
    base_plot <- (ggplot(fitted.lm, aes(1:nrow(lm_matrix), .cooksd, ymin = 0, ymax = cooksd)) +
-              geom_point() + 
-              geom_linerange() +
+              geom_point(size = scale.factor) + 
+              geom_linerange(size = scale.factor) +
               xlab("Observation Number") +
               ylab("Cook's distance") +
               ggtitle("Cook's Distance Plot") +
@@ -58,7 +59,7 @@ gg_cooksd <- function(fitted.lm, label = TRUE, show.threshold = TRUE, threshold 
    if (label) {
       out_inds <- which(cooksd < min(threshold))
       lm_matrix[out_inds, "rowname"] <- rep("", length(out_inds))
-      base_plot = base_plot + geom_text(label = lm_matrix[, "rowname"], nudge_x = 2, color = "indianred3")
+      base_plot = base_plot + geom_text(label = lm_matrix[, "rowname"], nudge_x = 4, color = "indianred3")
    }
    
    # showing threshold for outliers
@@ -71,7 +72,7 @@ gg_cooksd <- function(fitted.lm, label = TRUE, show.threshold = TRUE, threshold 
             if (threshold[i] > max_cook) {
                next
             }
-            base_plot = base_plot + geom_hline(yintercept = threshold[i], linetype = "dashed", color = "indianred3")
+            base_plot = base_plot + geom_hline(yintercept = threshold[i], linetype = "dashed", color = "indianred3", size = scale.factor)
          }
       }
    }

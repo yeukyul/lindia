@@ -4,7 +4,7 @@
 \alias{gg_boxcox}
 \title{Plot boxcox graph in ggplot with suggested lambda transformation}
 \usage{
-gg_boxcox(fitted.lm, showlambda = TRUE, lambdaSF = 3)
+gg_boxcox(fitted.lm, showlambda = TRUE, lambdaSF = 3, scale.factor = 1)
 }
 \arguments{
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
@@ -12,6 +12,8 @@ gg_boxcox(fitted.lm, showlambda = TRUE, lambdaSF = 3)
 \item{showlambda}{logical; controls whether lambda value should be displayed on graph. Defaults to TRUE}
 
 \item{lambdaSF}{numeric; controls to how many significant figure is lambda rounded to. Defaults to 3.}
+
+\item{scale.factor}{numeric; scales the point size and linewidth to allow customized viewing. Defaults to 1.}
 }
 \value{
 A ggplot object that contains boxcox graph

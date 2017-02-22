@@ -4,7 +4,7 @@
 \alias{gg_scalelocation}
 \title{Plot scale-location (also called spread-location plot) in ggplot.}
 \usage{
-gg_scalelocation(fitted.lm, method = "loess")
+gg_scalelocation(fitted.lm, method = "loess", scale.factor = 1)
 }
 \arguments{
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
@@ -12,6 +12,8 @@ gg_scalelocation(fitted.lm, method = "loess")
 \item{method}{smoothing method of fitted line on scale-location plot. 
 eg. "lm", "glm", "gam", "loess", "rlm". See \url{http://docs.ggplot2.org/current/geom_smooth.html}
 for more details.}
+
+\item{scale.factor}{numeric; scales the point size and linewidth to allow customized viewing. Defaults to 1.}
 }
 \value{
 A ggplot object that contains scale-location graph

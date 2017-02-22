@@ -17,6 +17,8 @@ would return a list of residual plots. Parameter defaults to TRUE.}
 
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
 
+\item{scale.factor}{numeric; scales the point size and linewidth to allow customized viewing. Defaults to 1.}
+
 \item{data}{original dataset}
 
 \item{plotAll}{boolean value to determine whether plot will be return as 

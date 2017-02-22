@@ -16,7 +16,7 @@ gg_diagnose(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE,
 an arranged grid. When set to false, the function
 will return a list of diagnostic plots. Parameter defaults to TRUE.}
 
-\item{scale.factor}{numeric; scales the point size, linewidth, labels in all diagnostic plots to allow optimal viewing. Defaults to 1.}
+\item{scale.factor}{numeric; scales the point size, linewidth, labels in all diagnostic plots to allow optimal viewing. Defaults to 0.5.}
 
 \item{lm}{lm object that contains fitted regression}
 }

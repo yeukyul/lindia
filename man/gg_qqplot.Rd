@@ -4,10 +4,12 @@
 \alias{gg_qqplot}
 \title{Plot quantile-quantile plot (QQPlot) in ggplot with qqline shown.}
 \usage{
-gg_qqplot(fitted.lm)
+gg_qqplot(fitted.lm, scale.factor = 1)
 }
 \arguments{
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
+
+\item{scale.factor}{numeric; scales the point size and linewidth to allow customized viewing. Defaults to 1.}
 }
 \value{
 A qqplot with fitted qqline

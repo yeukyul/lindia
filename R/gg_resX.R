@@ -5,6 +5,7 @@
 #' @param plotAll boolean value to determine whether plot will be return as 
 #' a plot arranged using `grid.arrange()`. When set to false, the function
 #' would return a list of residual plots. Parameter defaults to TRUE.
+#' @param scale.factor numeric; scales the point size and linewidth to allow customized viewing. Defaults to 1.
 #' @return An arranged grid of residuals against predictor values plots in ggplot. 
 #' If plotall is set to FALSE,  a list of ggplot objects will be returned instead. 
 #' Name of the plots are set to respective variable names.
@@ -22,7 +23,7 @@
 #' plot_all(exclude_plots)              # make use of plot_all() in lindia
 #' plot_all(include_plots)
 #' @export
-gg_resX <- function(fitted.lm, plotAll = TRUE){
+gg_resX <- function(fitted.lm, plotAll = TRUE, scale.factor = 1){
    
    handle_exception(fitted.lm, "gg_resX")
    
@@ -41,7 +42,7 @@ gg_resX <- function(fitted.lm, plotAll = TRUE){
    
    for (i in 1:length(var_names)){
       var = var_names[i]
-      this_plot <- get_resplot(var, lm_matrix, fitted.lm)
+      this_plot <- get_resplot(var, lm_matrix, fitted.lm, scale.factor)
       if (!is.null(this_plot)) {
          plots[[n]] <- this_plot
          n = n + 1
@@ -74,7 +75,7 @@ gg_resX <- function(fitted.lm, plotAll = TRUE){
 #
 # output : a ggplot object of var vs. residual of fitted lm
 #
-get_resplot <- function(var, lm_matrix, fitted.lm){
+get_resplot <- function(var, lm_matrix, fitted.lm, scale.factor){
    
    # to center residual plot around y = 0 line
    res = residuals(fitted.lm)
@@ -92,8 +93,8 @@ get_resplot <- function(var, lm_matrix, fitted.lm){
       return (ggplot(data = fitted.lm, aes(x = lm_matrix[, var], y = fitted.lm$residuals)) + 
                  labs(x = var, y = "residuals") + 
                  ggtitle(paste("Residual vs.", var)) + 
-                 geom_point() +
-                 geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3") +
+                 geom_point(size = scale.factor) +
+                 geom_hline(yintercept = 0, linetype = "dashed", color = "indianred3", size = scale.factor) +
                  ylim(-(limit + margin), limit + margin))
    }
    # categorical variable: return boxplot
@@ -101,7 +102,7 @@ get_resplot <- function(var, lm_matrix, fitted.lm){
       base_plot = ggplot(data = data.frame(lm_matrix), aes(x = lm_matrix[, var], y = fitted.lm$residuals)) + 
          labs(x = var, y = "residuals") + 
          ggtitle(paste("Residual vs.", var)) + 
-         geom_boxplot()
+         geom_boxplot(size = scale.factor)
       if (nlevels(lm_matrix[, var]) > n_var_threshold) {
          return (base_plot + theme(axis.text.x = element_text(angle = 45, hjust = 1)))
       }

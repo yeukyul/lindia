@@ -4,7 +4,7 @@
 \alias{gg_resleverage}
 \title{Plot residual versus leverage plot in ggplot.}
 \usage{
-gg_resleverage(fitted.lm, method = "loess", se = FALSE)
+gg_resleverage(fitted.lm, method = "loess", se = FALSE, scale.factor = 1)
 }
 \arguments{
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
@@ -14,6 +14,8 @@ eg. "lm", "glm", "gam", "loess", "rlm". See \url{http://docs.ggplot2.org/current
 for more details.}
 
 \item{se}{logical; determines whether se belt should be plotted on plot}
+
+\item{scale.factor}{numeric; scales the point size and linewidth to allow customized viewing. Defaults to 1.}
 }
 \value{
 A ggplot object that contains residual vs. leverage graph
