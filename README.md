@@ -166,7 +166,7 @@ gg_resleverage(cars_lm)
 gg\_cooksd
 ==========
 
-Plots residual vs. leverage of data points to detect outliers using cook's distance.
+Plots cook's distance plot that helps identify outliers. Observation numbers are plotted next to data points that are considered anamolies.
 
 ``` r
 gg_cooksd(cars_lm)
@@ -177,7 +177,7 @@ gg_cooksd(cars_lm)
 gg\_diagnose
 ============
 
-An aggregate plot of all diagnostics plots, layed out on one panel as demonstrated in the beginning of this read me document. User can set `theme` parameter to a specific theme type in order to apply to all plots in the panel.
+An aggregate plot of all diagnostics plots, layed out on one panel as demonstrated in the beginning of this README document. User can set `theme` parameter to a specific theme type in order to apply to all plots in the panel.
 
 ``` r
 gg_diagnose(cars_lm_2, theme = theme_bw())
@@ -188,7 +188,7 @@ gg_diagnose(cars_lm_2, theme = theme_bw())
 If user set `plotAll` parameter to false, `gg_diagnose` would return a list of ggplot objects which user can manipulate. `lindia` also provides a handy trick that allows user to scale all point sizes and linewidth at once, using the parameter `scale.factor`. Followed is an extreme example by setting `scale.factor` to 0.3.
 
 ``` r
-gg_diagnose(cars_lm_2, scale.factor = 0.3)
+gg_diagnose(cars_lm_2, theme = theme_bw(), scale.factor = 0.3)
 ```
 
 ![](figures/README-unnamed-chunk-17-1.png)
