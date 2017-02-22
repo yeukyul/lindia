@@ -21,3 +21,5 @@ chartjs
 stringi
 bootstrap
 readr
+nlme
+mgcv
