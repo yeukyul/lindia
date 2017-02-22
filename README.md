@@ -25,13 +25,13 @@ Followed are functions implemented in `lindia`:
 
 -   [`gg_reshist()`](#gg_reshist): plotting the histogram of distribution of residuals
 -   [`gg_resfitted()`](#gg_resfitted): residual plot of residuals by fitted value
--   [`gg_resX()`](#%20gg_resX): a list of residual plots of all predictors by fitted value (continuous variables only for now. Categorical and interaction terms are developing.)
+-   [`gg_resX()`](#%20gg_resX): a list of residual plots of all predictors by fitted value.
 -   [`gg_qqplot()`](#%20gg_qqplot): Normaility quantile-quantile plot (QQPlot) with qqline overlayed on top
 -   [`gg_boxcox()`](#%20gg_boxcox): boxcox graph with optimal transformation labeled on graph
 -   [`gg_scalelocation()`](#%20gg_scalelocation): scale-location plot (also called spread-location plot).
--   [`gg_resleverage()`](#%20gg_resleverage): residual vs. leverage plot. (cook distance indicators not implemented for now)
--   [`gg_diagnose()`](#%20gg_diagnose): all diagnostic plots being layed out on a grid (not functional yet).
+-   [`gg_resleverage()`](#%20gg_resleverage): residual vs. leverage plot
 -   [`gg_cooksd()`](#gg_cooksd): cook's distance plot with potential outliars labeled on top
+-   [`gg_diagnose()`](#%20gg_diagnose): all diagnostic plots being layed out on a grid.
 
 `gg_resX()` and `gg_diagnose()` would return multiple plots after a call to the function. By default, they would return one aggregate plot of all diagnostic plots as one arranged grid. If user needs more flexibility in determining graphical elements and inclusion/exclustion of certain plots, set `plotAll` parameter in the function call to `FALSE`. It will return a list of all plots, which user can manipulate.
 
