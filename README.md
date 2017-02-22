@@ -40,9 +40,9 @@ An example would as be followed:
 ``` r
 plots <- gg_diagnose(cars_lm, plotAll = FALSE)
 names(plots)
-#  [1] "residual_hist"    "Passengers"       "Length"          
-#  [4] "RPM"              "res_fitted"       "gg_qqplot"       
-#  [7] "gg_boxcox"        "gg_scalelocation" "gg_resleverage"
+#   [1] "residual_hist" "Passengers"    "Length"        "RPM"          
+#   [5] "res_fitted"    "qqplot"        "boxcox"        "scalelocation"
+#   [9] "resleverage"   "cooksd"
 exclude_plots <- plots[-c(1, 3) ]    #exclude certain diagnostics plots
 include_plots <- plots[c(1, 3)]      # include certain diagnostics plots
 ```

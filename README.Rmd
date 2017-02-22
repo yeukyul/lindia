@@ -6,7 +6,7 @@ output:
 
 ```{r, echo = FALSE, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE, cache = TRUE,
+  collapse = TRUE, 
   comment = "# ",
   fig.path = "figures/README-"
 )
