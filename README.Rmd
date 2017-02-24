@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "# ",
   fig.path = "figures/README-"
 )
-library(MASS)
+
 library(ggplot2)
 library(lindia)
 data(Cars93)
@@ -29,6 +29,15 @@ cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 # visualize diagnostic plots with a call to lindia
 gg_diagnose(cars_lm)
 ```
+
+The functionality of lindia is an improvement of the features provided in base-R graphs. Using base-R, user can also create a series of diagnostic plots using the following line: 
+
+```{r, warning = F, message = F, fig.width = 12, fig.height = 10}
+par(mfrow = c(2,2))
+plot(cars_lm)
+```
+
+However, the output from a call to `plot()` lacks flexibility and comprehensiveness. For example, residual vs. predictor plots are not shown, and that users cannot easily maipulate graph type and aesthetics. In that sense, `lindia` is an extension to features offered in base-R.
 
 #Installation
 

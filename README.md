@@ -13,6 +13,17 @@ gg_diagnose(cars_lm)
 
 ![](figures/README-unnamed-chunk-2-1.png)
 
+The functionality of lindia is an improvement of the features provided in base-R graphs. Using base-R, user can also create a series of diagnostic plots using the following line:
+
+``` r
+par(mfrow = c(2,2))
+plot(cars_lm)
+```
+
+![](figures/README-unnamed-chunk-3-1.png)
+
+However, the output from a call to `plot()` lacks flexibility and comprehensiveness. For example, residual vs. predictor plots are not shown, and that users cannot easily maipulate graph type and aesthetics. In that sense, `lindia` is an extension to features offered in base-R.
+
 Installation
 ============
 
@@ -53,7 +64,7 @@ In addition, `lindia` provides a `plot_all()` feature that allows user to pass i
 plot_all(exclude_plots)
 ```
 
-![](figures/README-unnamed-chunk-4-1.png)
+![](figures/README-unnamed-chunk-5-1.png)
 
 All graphical styles returned by lindia graphing function can be overwritten by a call to `ggplot::theme()` (except `gg_resX()` and `gg_diagnose()`, which would return a list rather than a single ggplot object).
 
@@ -61,7 +72,7 @@ All graphical styles returned by lindia graphing function can be overwritten by 
 gg_resfitted(cars_lm) + theme_bw()
 ```
 
-![](figures/README-unnamed-chunk-5-1.png)
+![](figures/README-unnamed-chunk-6-1.png)
 
 Functions in Lindia
 ===================
@@ -77,7 +88,7 @@ Plots distribution of residuals in histograms. Number of bins picked by default.
 gg_reshist(cars_lm)
 ```
 
-![](figures/README-unnamed-chunk-6-1.png)
+![](figures/README-unnamed-chunk-7-1.png)
 
 Can also specify number of bins using `bins` argument:
 
@@ -85,7 +96,7 @@ Can also specify number of bins using `bins` argument:
 gg_reshist(cars_lm, bins = 20)
 ```
 
-![](figures/README-unnamed-chunk-7-1.png)
+![](figures/README-unnamed-chunk-8-1.png)
 
 gg\_resX
 ========
@@ -97,7 +108,7 @@ cars_lm_2 <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
 gg_resX(cars_lm)
 ```
 
-![](figures/README-unnamed-chunk-8-1.png)
+![](figures/README-unnamed-chunk-9-1.png)
 
 `lindia` can also handle linear models with interaction terms.
 
@@ -106,7 +117,7 @@ cars_lm_inter <- lm(Price ~ Passengers * Length, data = Cars93)
 gg_resX(cars_lm_inter)
 ```
 
-![](figures/README-unnamed-chunk-9-1.png)
+![](figures/README-unnamed-chunk-10-1.png)
 
 gg\_resfitted
 =============
@@ -117,7 +128,7 @@ Plots residual against fitted value.
 gg_resfitted(cars_lm)
 ```
 
-![](figures/README-unnamed-chunk-10-1.png)
+![](figures/README-unnamed-chunk-11-1.png)
 
 gg\_qqplot
 ==========
@@ -128,7 +139,7 @@ Plots quantile quantile plot of a linear model, with qqline overlayed on top.
 gg_qqplot(cars_lm)
 ```
 
-![](figures/README-unnamed-chunk-11-1.png)
+![](figures/README-unnamed-chunk-12-1.png)
 
 gg\_boxcox
 ==========
@@ -139,7 +150,7 @@ Plots boxcox graph of given lm object, with labels showing optimal transforming 
 gg_boxcox(cars_lm)
 ```
 
-![](figures/README-unnamed-chunk-12-1.png)
+![](figures/README-unnamed-chunk-13-1.png)
 
 gg\_scalelocation
 =================
@@ -150,7 +161,7 @@ Plots scale location graph of linear model.
 gg_scalelocation(cars_lm)
 ```
 
-![](figures/README-unnamed-chunk-13-1.png)
+![](figures/README-unnamed-chunk-14-1.png)
 
 gg\_resleverage
 ===============
@@ -161,7 +172,7 @@ Plots residual vs. leverage of data points to detect outliers using cook's dista
 gg_resleverage(cars_lm)
 ```
 
-![](figures/README-unnamed-chunk-14-1.png)
+![](figures/README-unnamed-chunk-15-1.png)
 
 gg\_cooksd
 ==========
@@ -172,7 +183,7 @@ Plots cook's distance plot that helps identify outliers. Observation numbers are
 gg_cooksd(cars_lm)
 ```
 
-![](figures/README-unnamed-chunk-15-1.png)
+![](figures/README-unnamed-chunk-16-1.png)
 
 gg\_diagnose
 ============
@@ -183,7 +194,7 @@ An aggregate plot of all diagnostics plots, layed out on one panel as demonstrat
 gg_diagnose(cars_lm_2, theme = theme_bw())
 ```
 
-![](figures/README-unnamed-chunk-16-1.png)
+![](figures/README-unnamed-chunk-17-1.png)
 
 If user set `plotAll` parameter to false, `gg_diagnose` would return a list of ggplot objects which user can manipulate. `lindia` also provides a handy trick that allows user to scale all point sizes and linewidth at once, using the parameter `scale.factor`. Followed is an extreme example by setting `scale.factor` to 0.3.
 
@@ -191,7 +202,7 @@ If user set `plotAll` parameter to false, `gg_diagnose` would return a list of g
 gg_diagnose(cars_lm_2, theme = theme_bw(), scale.factor = 0.3)
 ```
 
-![](figures/README-unnamed-chunk-17-1.png)
+![](figures/README-unnamed-chunk-18-1.png)
 
 Package Dependency
 ==================
