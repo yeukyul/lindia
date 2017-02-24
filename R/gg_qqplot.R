@@ -25,7 +25,7 @@ gg_qqplot <- function(fitted.lm, scale.factor = 1){
    # generate ggplot for qqplot
    qq_plot <- ggplot(data = fitted.lm) + 
       stat_qq(aes(sample = res), size = scale.factor) + 
-      labs(x = "theoractical_quantile", y = "standardized_residual") +
+      labs(x = "theoretical_quantile", y = "standardized_residual") +
       geom_abline(data = qq_line ,aes(intercept = intercept ,slope = slope), color = "indianred3", size = scale.factor) +
       ggtitle("Normal-QQ Plot")
    qq_plot
