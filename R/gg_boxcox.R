@@ -44,7 +44,7 @@ gg_boxcox <- function(fitted.lm, showlambda = TRUE, lambdaSF = 3, scale.factor =
 
    plot <- ggplot(data = boxcox_unlist) +
       geom_segment(aes(x = xstart, y = ystart, xend = xend, yend = yend), size = scale.factor) +
-      labs(x = "lambda", y = "log-likelihood") +
+      labs(x = "Lambda", y = "Log-likelihood") +
       ggtitle("Boxcox Plot") +
       geom_vline(xintercept = best_lambda, linetype = "dotted", size = scale.factor/2) +
       geom_vline(xintercept = conf_lo, linetype = "dotted", size = scale.factor/2) +

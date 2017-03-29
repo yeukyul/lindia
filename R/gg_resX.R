@@ -100,7 +100,7 @@ get_resplot <- function(var, lm_matrix, fitted.lm, scale.factor){
    # categorical variable: return boxplot
    else {
       base_plot = ggplot(data = data.frame(lm_matrix), aes(x = lm_matrix[, var], y = fitted.lm$residuals)) +
-         labs(x = var, y = "residuals") +
+         labs(x = var, y = "Residuals") +
          ggtitle(paste("Residual vs.", var)) +
          geom_boxplot(size = scale.factor)
       if (nlevels(lm_matrix[, var]) > n_var_threshold) {

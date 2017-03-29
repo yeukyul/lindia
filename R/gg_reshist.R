@@ -13,23 +13,23 @@
 #' # specify number of bins
 #' gg_reshist(cars_lm. bins = 20)
 #' @export
-#' 
+#'
 gg_reshist <- function(fitted.lm, bins = NULL) {
-   
+
    handle_exception(fitted.lm, "gg_reshist")
-   
+
    #obtain residual and fitted values from fitted.lm
    res = data.frame(residuals = residuals(fitted.lm))
-   
+
    if (is.null(bins)) {
       return (ggplot(data = res, aes(x = residuals)) + geom_histogram(color = "white") +
-                 ggtitle("Histogram of Residuals") + 
-                 labs(x = "residuals"))
+                 ggtitle("Histogram of Residuals") +
+                 labs(x = "Residuals"))
    }
    else {
       return (ggplot(data = res, aes(x = residuals)) + geom_histogram(color = "white", bins = bins) +
                  ggtitle("Histogram of Residuals") +
-                 labs(x = "residuals"))
+                 labs(x = "Residuals", y = "Count"))
    }
-   
+
 }

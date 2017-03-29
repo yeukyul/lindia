@@ -5,7 +5,7 @@
 \title{Plot all diagnostic plots given fitted linear regression line.}
 \usage{
 gg_diagnose(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE,
-  scale.factor = 0.5)
+  scale.factor = 0.5, boxcox = FALSE)
 }
 \arguments{
 \item{theme}{ggplot graphing style using `ggplot::theme()`. A ggplot graphing style to apply to all plots. Default to null.}
@@ -17,6 +17,8 @@ an arranged grid. When set to false, the function
 will return a list of diagnostic plots. Parameter defaults to TRUE.}
 
 \item{scale.factor}{numeric; scales the point size, linewidth, labels in all diagnostic plots to allow optimal viewing. Defaults to 0.5.}
+
+\item{boxcox}{logical; detemine whether boxcox plot will be included. Parameter defaults to FALSE.}
 
 \item{lm}{lm object that contains fitted regression}
 }

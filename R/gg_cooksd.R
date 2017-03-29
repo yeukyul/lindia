@@ -59,7 +59,7 @@ gg_cooksd <- function(fitted.lm, label = TRUE, show.threshold = TRUE, threshold 
    if (label) {
       out_inds <- which(cooksd < min(threshold))
       lm_matrix[out_inds, "rowname"] <- rep("", length(out_inds))
-      base_plot = base_plot + geom_text(label = lm_matrix[, "rowname"], nudge_x = 4, color = "indianred3")
+      base_plot = base_plot + geom_text(label = lm_matrix[, "rowname"], nudge_x = 3, color = "indianred3")
    }
 
    # showing threshold for outliers
