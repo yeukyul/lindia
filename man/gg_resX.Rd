@@ -4,20 +4,20 @@
 \alias{gg_resX}
 \title{Generate residual plot of residuals against predictors}
 \usage{
-gg_resX(fitted.lm, plotAll = TRUE, scale.factor = 1)
+gg_resX(fitted.lm, plotAll = TRUE, scale.factor = 0.5)
 }
 \arguments{
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
 
-\item{plotAll}{boolean value to determine whether plot will be return as 
+\item{plotAll}{boolean value to determine whether plot will be return as
 a plot arranged using `grid.arrange()`. When set to false, the function
 would return a list of residual plots. Parameter defaults to TRUE.}
 
-\item{scale.factor}{numeric; scales the point size and linewidth to allow customized viewing. Defaults to 1.}
+\item{scale.factor}{numeric; scales the point size and linewidth to allow customized viewing. Defaults to 0.5.}
 }
 \value{
-An arranged grid of residuals against predictor values plots in ggplot. 
-If plotall is set to FALSE,  a list of ggplot objects will be returned instead. 
+An arranged grid of residuals against predictor values plots in ggplot.
+If plotall is set to FALSE,  a list of ggplot objects will be returned instead.
 Name of the plots are set to respective variable names.
 }
 \description{

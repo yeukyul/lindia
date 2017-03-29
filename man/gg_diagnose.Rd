@@ -5,14 +5,14 @@
 \title{Plot all diagnostic plots given fitted linear regression line.}
 \usage{
 gg_diagnose(fitted.lm, theme = NULL, ncol = NULL, plotAll = TRUE,
-  scale.factor = 1)
+  scale.factor = 0.5)
 }
 \arguments{
 \item{theme}{ggplot graphing style using `ggplot::theme()`. A ggplot graphing style to apply to all plots. Default to null.}
 
 \item{ncol}{specify number of columns in resulting plot. Default to make a square matrix of the output.}
 
-\item{plotAll}{logical; determine whether plot will be returned as 
+\item{plotAll}{logical; determine whether plot will be returned as
 an arranged grid. When set to false, the function
 will return a list of diagnostic plots. Parameter defaults to TRUE.}
 
@@ -21,8 +21,8 @@ will return a list of diagnostic plots. Parameter defaults to TRUE.}
 \item{lm}{lm object that contains fitted regression}
 }
 \value{
-An arranged grid of linear model diagnostics plots in ggplot. 
-If plotall is set to FALSE, a list of ggplot objects will be returned instead. 
+An arranged grid of linear model diagnostics plots in ggplot.
+If plotall is set to FALSE, a list of ggplot objects will be returned instead.
 Name of the plots are set to respective variable names.
 }
 \description{
@@ -33,7 +33,7 @@ library(MASS)
 data(Cars93)
 # a regression with categorical variable
 cars_lm <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
-gg_diagnose(cars_lm, data = Cars93)
+gg_diagnose(cars_lm
 # customize which diagnostic plot is included
 plots <- gg_diagnose(cars_lm, data = Cars93, plotAll = FALSE)
 names(plots)     # get name of the plots
