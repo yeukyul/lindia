@@ -42,7 +42,7 @@ gg_cooksd <- function(fitted.lm, label = TRUE, show.threshold = TRUE, threshold 
    }
 
    # window limit
-   limit = max(cooksd)
+   limit = max(cooksd, na.rm = T)
    margin_factor = 5
    margin = round(limit / margin_factor)
    max_cook = limit + margin

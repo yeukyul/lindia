@@ -5,7 +5,9 @@
 #' @param plotAll boolean value to determine whether plot will be return as
 #' a plot arranged using `grid.arrange()`. When set to false, the function
 #' would return a list of residual plots. Parameter defaults to TRUE.
+#' @param ncol specify number of columns in resulting plot per page. Default to make a square matrix of the output.
 #' @param scale.factor numeric; scales the point size and linewidth to allow customized viewing. Defaults to 0.5.
+#' @param max.per.page numeric; maximum number of plots allowed in one page. Parameter defaults to fit all plots on one page.
 #' @return An arranged grid of residuals against predictor values plots in ggplot.
 #' If plotall is set to FALSE,  a list of ggplot objects will be returned instead.
 #' Name of the plots are set to respective variable names.
@@ -23,7 +25,7 @@
 #' plot_all(exclude_plots)              # make use of plot_all() in lindia
 #' plot_all(include_plots)
 #' @export
-gg_resX <- function(fitted.lm, plotAll = TRUE, scale.factor = 0.5){
+gg_resX <- function(fitted.lm, plotAll = TRUE, scale.factor = 0.5, max.per.page = NA, ncol = NA){
 
    handle_exception(fitted.lm, "gg_resX")
 
@@ -52,11 +54,18 @@ gg_resX <- function(fitted.lm, plotAll = TRUE, scale.factor = 0.5){
 
    # rename the plots
    names(plots) = var_names
+   
+   # handle malformed max.per.page request 
+   if (is.na(max.per.page)) {
+      max.per.page = length(plots)
+   } else if (class(max.per.page) != "numeric" || max.per.page < 1) {
+      message("Maximum plots per page invalid; switch to default")
+      max.per.page = length(plots)
+   }
 
    # determine to plot the plots, or return a list of plots
    if (plotAll) {
-      nCol = get_ncol(dim)
-      return (do.call("grid.arrange", c(plots, ncol = nCol)))
+      return(arrange.plots(plots, max.per.page, ncol))
    }
    else {
       return (plots)
@@ -64,6 +73,36 @@ gg_resX <- function(fitted.lm, plotAll = TRUE, scale.factor = 0.5){
 
 }
 
+#
+# arrange.plots arranges plot to pages according to max.per.page
+#
+arrange.plots <- function(plots, plots.per.page, ncol) {
+   
+   # get total number of plots
+   len <- length(plots)
+   if (plots.per.page >= len) {
+      if (is.na(ncol)) {
+         nCol = get_ncol(len)
+      } else {
+         nCol = ncol
+      }
+      return (do.call("grid.arrange", c(plots, ncol = nCol)))
+   }
+   
+   # get pages needed
+   pages <- ceiling(len/plots.per.page)
+   
+   for (i in 1:pages) {
+     start = (i - 1) * (plots.per.page) + 1
+     end = min(i * plots.per.page, len)
+     if (is.na(ncol)) {
+        nCol = get_ncol(end-start)
+     } else {
+        nCol = ncol
+     }
+     do.call("grid.arrange", c(plots[start:end], ncol = nCol))
+   }
+}
 
 #
 # get_resplot - returns a ggplot object of residuals in fitted.lm against var in lm_matrix

@@ -4,7 +4,8 @@
 \alias{gg_resX}
 \title{Generate residual plot of residuals against predictors}
 \usage{
-gg_resX(fitted.lm, plotAll = TRUE, scale.factor = 0.5)
+gg_resX(fitted.lm, plotAll = TRUE, scale.factor = 0.5, max.per.page = NA,
+  ncol = NA)
 }
 \arguments{
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
@@ -14,6 +15,10 @@ a plot arranged using `grid.arrange()`. When set to false, the function
 would return a list of residual plots. Parameter defaults to TRUE.}
 
 \item{scale.factor}{numeric; scales the point size and linewidth to allow customized viewing. Defaults to 0.5.}
+
+\item{max.per.page}{numeric; maximum number of plots allowed in one page. Parameter defaults to fit all plots on one page.}
+
+\item{ncol}{specify number of columns in resulting plot per page. Default to make a square matrix of the output.}
 }
 \value{
 An arranged grid of residuals against predictor values plots in ggplot.
