@@ -13,6 +13,7 @@
 #' gg_boxcox(cars_lm)
 #'
 #' @export
+#' @importFrom MASS boxcox
 gg_boxcox <- function(fitted.lm, showlambda = TRUE, lambdaSF = 3, scale.factor = 0.5){
 
    handle_exception(fitted.lm, "gg_boxcox")

@@ -28,6 +28,8 @@
 #' plot_all(exclude_plots)              # make use of plot_all() in lindia
 #' plot_all(include_plots)
 #' @export
+#' @import ggplot2
+#' @importFrom gridExtra grid.arrange
 gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plotAll = TRUE, 
                         scale.factor = 0.5, boxcox = FALSE, max.per.page = NA) 
    {
