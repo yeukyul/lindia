@@ -8,6 +8,8 @@ plot_all(plots, ncol = NULL)
 }
 \arguments{
 \item{plots}{a list of plots}
+
+\item{ncol}{the number of column that the arranged grid need to be}
 }
 \value{
 plots in a given list arrangeed using gridExtra

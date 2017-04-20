@@ -2,7 +2,7 @@
 
 #' Plot all diagnostic plots given fitted linear regression line.
 #'
-#' @param lm lm object that contains fitted regression
+#' @param fitted.lm lm object that contains fitted regression
 #' @param theme ggplot graphing style using `ggplot::theme()`. A ggplot graphing style to apply to all plots. Default to null.
 #' @param ncol specify number of columns in resulting plot per page. Default to make a square matrix of the output.
 #' @param plotAll logical; determine whether plot will be returned as
@@ -19,7 +19,7 @@
 #' data(Cars93)
 #' # a regression with categorical variable
 #' cars_lm <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
-#' gg_diagnose(cars_lm
+#' gg_diagnose(cars_lm)
 #' # customize which diagnostic plot is included
 #' plots <- gg_diagnose(cars_lm, data = Cars93, plotAll = FALSE)
 #' names(plots)     # get name of the plots

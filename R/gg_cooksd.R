@@ -46,6 +46,8 @@ gg_cooksd <- function(fitted.lm, label = TRUE, show.threshold = TRUE, threshold 
    margin_factor = 5
    margin = round(limit / margin_factor)
    max_cook = limit + margin
+   
+   .cooksd <- NULL
 
    base_plot <- (ggplot(fitted.lm, aes(1:nrow(lm_matrix), .cooksd, ymin = 0, ymax = cooksd)) +
               geom_point(size = scale.factor) +

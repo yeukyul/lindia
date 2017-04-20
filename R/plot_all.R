@@ -1,6 +1,7 @@
 #' Plot all given plots in a square matrix form.
 #'
 #' @param plots a list of plots
+#' @param ncol the number of column that the arranged grid need to be
 #' @return plots in a given list arrangeed using gridExtra
 #' @examples plots <- gg_diagnose(reg.line)
 #'          names(plots)

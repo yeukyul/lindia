@@ -1,4 +1,5 @@
 Package: lindia
+Type: Package
 Title: Linear Regression Diagonostic Plots in GGPlot
 Version: 0.0.0.9000
 Authors@R: c(person("Yeuk Yu", "Lee", 
@@ -8,10 +9,11 @@ Authors@R: c(person("Yeuk Yu", "Lee",
     email = "sventura@stat.cmu.edu", 
     role = c("aut")))
 Description: Allows easy generation of linear regression diagnostic plots 
-    in GGPlot. Graph types include residual plots, QQPlot, Boxcox graph, 
-    scale-location plot, and residual leverage plot. This package is meant 
-    for easy scheming of linear regression diagnostics. See the ggplot2 
-    website for more information regarding the functionality of ggplot.
+    in GGPlot. Graph types include residual plots, QQPlot, boxcox graph, 
+    scale-location plot, cook's distance plot, and residual leverage plot. 
+    This package is meant for easy scheming of linear regression diagnostics. 
+    See the ggplot2 website for more information regarding the functionality 
+    of ggplot.
 Depends:
     R (>= 3.2.2)
 License: MIT + file LICENSE
@@ -24,4 +26,3 @@ Imports:
     gridExtra
 URL: https://github.com/yeukyul/lindia
 BugReports: https://github.com/yeukyul/lindia/issues
-

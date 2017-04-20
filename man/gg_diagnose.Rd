@@ -8,6 +8,8 @@ gg_diagnose(fitted.lm, theme = NULL, ncol = NA, plotAll = TRUE,
   scale.factor = 0.5, boxcox = FALSE, max.per.page = NA)
 }
 \arguments{
+\item{fitted.lm}{lm object that contains fitted regression}
+
 \item{theme}{ggplot graphing style using `ggplot::theme()`. A ggplot graphing style to apply to all plots. Default to null.}
 
 \item{ncol}{specify number of columns in resulting plot per page. Default to make a square matrix of the output.}
@@ -21,8 +23,6 @@ will return a list of diagnostic plots. Parameter defaults to TRUE.}
 \item{boxcox}{logical; detemine whether boxcox plot will be included. Parameter defaults to FALSE.}
 
 \item{max.per.page}{numeric; maximum number of plots allowed in one page. Parameter defaults to 9.}
-
-\item{lm}{lm object that contains fitted regression}
 }
 \value{
 An arranged grid of linear model diagnostics plots in ggplot.
@@ -37,7 +37,7 @@ library(MASS)
 data(Cars93)
 # a regression with categorical variable
 cars_lm <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
-gg_diagnose(cars_lm
+gg_diagnose(cars_lm)
 # customize which diagnostic plot is included
 plots <- gg_diagnose(cars_lm, data = Cars93, plotAll = FALSE)
 names(plots)     # get name of the plots
