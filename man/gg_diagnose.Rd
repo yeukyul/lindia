@@ -22,7 +22,7 @@ will return a list of diagnostic plots. Parameter defaults to TRUE.}
 
 \item{boxcox}{logical; detemine whether boxcox plot will be included. Parameter defaults to FALSE.}
 
-\item{max.per.page}{numeric; maximum number of plots allowed in one page. Parameter defaults to 9.}
+\item{max.per.page}{numeric; maximum number of plots allowed in one page.}
 }
 \value{
 An arranged grid of linear model diagnostics plots in ggplot.
@@ -39,7 +39,7 @@ data(Cars93)
 cars_lm <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
 gg_diagnose(cars_lm)
 # customize which diagnostic plot is included
-plots <- gg_diagnose(cars_lm, data = Cars93, plotAll = FALSE)
+plots <- gg_diagnose(cars_lm, plotAll = FALSE)
 names(plots)     # get name of the plots
 exclude_plots <- plots[-c(1, 3) ]    #exclude certain diagnostics plots
 include_plots <- plots[c(1, 3)]      # include certain diagnostics plots

@@ -9,7 +9,7 @@ handle_exception <- function(input, function_name){
    type = class(input)
    
    # exception handling : input not lm object
-   if (type != "lm" && type != "glm"){
+   if (type != "lm"){
       stop(paste(function_name, "doesn't know how to handle non-lm object"))
    }
    

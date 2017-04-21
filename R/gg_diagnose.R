@@ -10,7 +10,7 @@
 #' will return a list of diagnostic plots. Parameter defaults to TRUE.
 #' @param scale.factor numeric; scales the point size, linewidth, labels in all diagnostic plots to allow optimal viewing. Defaults to 0.5.
 #' @param boxcox logical; detemine whether boxcox plot will be included. Parameter defaults to FALSE.
-#' @param max.per.page numeric; maximum number of plots allowed in one page. Parameter defaults to 9.
+#' @param max.per.page numeric; maximum number of plots allowed in one page.
 #' @return An arranged grid of linear model diagnostics plots in ggplot.
 #' If plotall is set to FALSE, a list of ggplot objects will be returned instead.
 #' Name of the plots are set to respective variable names.
@@ -21,7 +21,7 @@
 #' cars_lm <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
 #' gg_diagnose(cars_lm)
 #' # customize which diagnostic plot is included
-#' plots <- gg_diagnose(cars_lm, data = Cars93, plotAll = FALSE)
+#' plots <- gg_diagnose(cars_lm, plotAll = FALSE)
 #' names(plots)     # get name of the plots
 #' exclude_plots <- plots[-c(1, 3) ]    #exclude certain diagnostics plots
 #' include_plots <- plots[c(1, 3)]      # include certain diagnostics plots
