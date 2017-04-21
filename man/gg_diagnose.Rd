@@ -4,7 +4,7 @@
 \alias{gg_diagnose}
 \title{Plot all diagnostic plots given fitted linear regression line.}
 \usage{
-gg_diagnose(fitted.lm, theme = NULL, ncol = NA, plotAll = TRUE,
+gg_diagnose(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
   scale.factor = 0.5, boxcox = FALSE, max.per.page = NA)
 }
 \arguments{
@@ -14,7 +14,7 @@ gg_diagnose(fitted.lm, theme = NULL, ncol = NA, plotAll = TRUE,
 
 \item{ncol}{specify number of columns in resulting plot per page. Default to make a square matrix of the output.}
 
-\item{plotAll}{logical; determine whether plot will be returned as
+\item{plot.all}{logical; determine whether plot will be returned as
 an arranged grid. When set to false, the function
 will return a list of diagnostic plots. Parameter defaults to TRUE.}
 
@@ -39,7 +39,7 @@ data(Cars93)
 cars_lm <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
 gg_diagnose(cars_lm)
 # customize which diagnostic plot is included
-plots <- gg_diagnose(cars_lm, plotAll = FALSE)
+plots <- gg_diagnose(cars_lm, plot.all = FALSE)
 names(plots)     # get name of the plots
 exclude_plots <- plots[-c(1, 3) ]    #exclude certain diagnostics plots
 include_plots <- plots[c(1, 3)]      # include certain diagnostics plots

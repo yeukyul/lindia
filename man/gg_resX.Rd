@@ -4,13 +4,13 @@
 \alias{gg_resX}
 \title{Generate residual plot of residuals against predictors}
 \usage{
-gg_resX(fitted.lm, plotAll = TRUE, scale.factor = 0.5, max.per.page = NA,
+gg_resX(fitted.lm, plot.all = TRUE, scale.factor = 0.5, max.per.page = NA,
   ncol = NA)
 }
 \arguments{
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
 
-\item{plotAll}{boolean value to determine whether plot will be return as
+\item{plot.all}{boolean value to determine whether plot will be return as
 a plot arranged using `grid.arrange()`. When set to false, the function
 would return a list of residual plots. Parameter defaults to TRUE.}
 
@@ -35,7 +35,7 @@ data(Cars93)
 cars_lm <- lm(Price ~ Passengers + Length + RPM + Origin, data = Cars93)
 gg_resX(cars_lm)
 # customize which diagnostic plot is included by have gg_resX to return a list of plots
-plots <- gg_resX(cars_lm, plotAll = FALSE)
+plots <- gg_resX(cars_lm, plot.all = FALSE)
 names(plots)     # get name of the plots
 exclude_plots <- plots[-1 ]    #exclude certain residual plots
 include_plots <- plots[1]      # include certain residual plots
