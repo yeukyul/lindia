@@ -2,7 +2,7 @@
 #' Generate residual plot of residuals against predictors
 #'
 #' @param fitted.lm a fitted linear model (i.e. lm, glm) that contains fitted regression
-#' @param plotAll boolean value to determine whether plot will be return as
+#' @param plot.all boolean value to determine whether plot will be return as
 #' a plot arranged using `grid.arrange()`. When set to false, the function
 #' would return a list of residual plots. Parameter defaults to TRUE.
 #' @param ncol specify number of columns in resulting plot per page. Default to make a square matrix of the output.
@@ -25,7 +25,7 @@
 #' plot_all(exclude_plots)       # make use of plot_all() in lindia
 #' plot_all(include_plots)
 #' @export
-gg_resX <- function(fitted.lm, plotAll = TRUE, scale.factor = 0.5, max.per.page = NA, ncol = NA){
+gg_resX <- function(fitted.lm, plot.all = TRUE, scale.factor = 0.5, max.per.page = NA, ncol = NA){
 
    handle_exception(fitted.lm, "gg_resX")
 

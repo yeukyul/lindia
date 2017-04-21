@@ -22,10 +22,6 @@ plot_all <- function(plots, ncol = NA, max.per.page = NA) {
    if (class(plots) != "list") {
       stop("plot_all() doesn't know how to handle non-list input")
    }
-   
-   if (is.na(ncol)) {
-      ncol = get_ncol(length(plots))
-   }
 
    # handle malformed max.per.page request 
    if (is.na(max.per.page)) {

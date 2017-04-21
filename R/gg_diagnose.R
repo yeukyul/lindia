@@ -5,7 +5,7 @@
 #' @param fitted.lm lm object that contains fitted regression
 #' @param theme ggplot graphing style using `ggplot::theme()`. A ggplot graphing style to apply to all plots. Default to null.
 #' @param ncol specify number of columns in resulting plot per page. Default to make a square matrix of the output.
-#' @param plotAll logical; determine whether plot will be returned as
+#' @param plot.all logical; determine whether plot will be returned as
 #' an arranged grid. When set to false, the function
 #' will return a list of diagnostic plots. Parameter defaults to TRUE.
 #' @param scale.factor numeric; scales the point size, linewidth, labels in all diagnostic plots to allow optimal viewing. Defaults to 0.5.
@@ -30,7 +30,7 @@
 #' @export
 #' @import ggplot2
 #' @importFrom gridExtra grid.arrange
-gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plotAll = TRUE, 
+gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE, 
                         scale.factor = 0.5, boxcox = FALSE, max.per.page = NA) 
    {
 
