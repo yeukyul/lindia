@@ -12,7 +12,7 @@
 #' @param boxcox logical; detemine whether boxcox plot will be included. Parameter defaults to FALSE.
 #' @param max.per.page numeric; maximum number of plots allowed in one page.
 #' @return An arranged grid of linear model diagnostics plots in ggplot.
-#' If plotall is set to FALSE, a list of ggplot objects will be returned instead.
+#' If plot.all is set to FALSE, a list of ggplot objects will be returned instead.
 #' Name of the plots are set to respective variable names.
 #' @examples
 #' library(MASS)
@@ -39,7 +39,7 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
    plots = list()
    # get all plots
    plots[["residual_hist"]] <- gg_reshist(fitted.lm)
-   plots = append(plots, gg_resX(fitted.lm, plotAll = FALSE, scale.factor = scale.factor))
+   plots = append(plots, gg_resX(fitted.lm, plot.all = FALSE, scale.factor = scale.factor))
    plots[["res_fitted"]] <- gg_resfitted(fitted.lm, scale.factor = scale.factor)
    plots[["qqplot"]] <- gg_qqplot(fitted.lm, scale.factor = scale.factor)
    plots[["scalelocation"]] <- gg_scalelocation(fitted.lm, scale.factor = scale.factor)
@@ -63,7 +63,7 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
    }
 
    # determine to plot the plots, or return a list of plots
-   if (plotAll) {
+   if (plot.all) {
       return(arrange.plots(plots, max.per.page, ncol))
    }
    else {

@@ -26,7 +26,7 @@ will return a list of diagnostic plots. Parameter defaults to TRUE.}
 }
 \value{
 An arranged grid of linear model diagnostics plots in ggplot.
-If plotall is set to FALSE, a list of ggplot objects will be returned instead.
+If plot.all is set to FALSE, a list of ggplot objects will be returned instead.
 Name of the plots are set to respective variable names.
 }
 \description{

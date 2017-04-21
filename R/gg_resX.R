@@ -64,7 +64,7 @@ gg_resX <- function(fitted.lm, plot.all = TRUE, scale.factor = 0.5, max.per.page
    }
 
    # determine to plot the plots, or return a list of plots
-   if (plotAll) {
+   if (plot.all) {
       return(arrange.plots(plots, max.per.page, ncol))
    }
    else {
