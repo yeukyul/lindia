@@ -8,12 +8,14 @@ Authors@R: c(person("Yeuk Yu", "Lee",
     person("Samuel", "Ventura", 
     email = "sventura@stat.cmu.edu", 
     role = c("aut")))
-Description: Allows easy generation of linear regression diagnostic plots 
-    in GGPlot. Graph types include residual plots, QQPlot, boxcox graph, 
-    scale-location plot, cook's distance plot, and residual leverage plot. 
-    This package is meant for easy scheming of linear regression diagnostics. 
-    See the ggplot2 website for more information regarding the functionality 
-    of ggplot.
+Description: Lindia provides a set of streamlined functions that allow
+    easy generation of linear regression diagnostic plots in ggplot
+    in just few commands. Graph types include residual plots, QQPlot, 
+    boxcox graph, scale-location plot, cook's distance plot, and 
+    residual-leverage plot. This package is meant for easy scheming of linear 
+    regression diagnostics, while preserving merits of layered graphics in 
+    ggplot.See the ggplot2 website for more information regarding the 
+    functionality of ggplot.
 Depends:
     R (>= 3.2.2)
 License: MIT + file LICENSE
