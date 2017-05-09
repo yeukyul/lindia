@@ -24,4 +24,3 @@ cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 gg_resfitted(cars_lm)
 
 }
-

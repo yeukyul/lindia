@@ -30,6 +30,7 @@
 #' @export
 #' @import ggplot2
 #' @importFrom gridExtra grid.arrange
+#' @importFrom stats fitted formula hatvalues qchisq qnorm quantile residuals rstandard
 gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE, 
                         scale.factor = 0.5, boxcox = FALSE, max.per.page = NA) 
    {

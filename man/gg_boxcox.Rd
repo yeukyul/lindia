@@ -28,4 +28,3 @@ cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 gg_boxcox(cars_lm)
 
 }
-

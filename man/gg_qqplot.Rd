@@ -23,4 +23,3 @@ data(Cars93)
 cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 gg_qqplot(cars_lm)
 }
-

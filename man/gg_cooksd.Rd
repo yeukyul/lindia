@@ -33,4 +33,3 @@ cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 gg_cooksd(cars_lm)
 
 }
-

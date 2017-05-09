@@ -25,4 +25,3 @@ gg_reshist(cars_lm)
 # specify number of bins
 gg_reshist(cars_lm, bins = 20)
 }
-

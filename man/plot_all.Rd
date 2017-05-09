@@ -31,4 +31,3 @@ Plot all given plots in a square matrix form.
          plot_all(selected.plots)
          
 }
-

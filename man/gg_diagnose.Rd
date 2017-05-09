@@ -46,4 +46,3 @@ include_plots <- plots[c(1, 3)]      # include certain diagnostics plots
 plot_all(exclude_plots)              # make use of plot_all() in lindia
 plot_all(include_plots)
 }
-

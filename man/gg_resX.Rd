@@ -42,4 +42,3 @@ include_plots <- plots[1]      # include certain residual plots
 plot_all(exclude_plots)       # make use of plot_all() in lindia
 plot_all(include_plots)
 }
-
