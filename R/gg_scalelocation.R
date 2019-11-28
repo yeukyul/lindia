@@ -24,9 +24,9 @@ gg_scalelocation <- function(fitted.lm, method = 'loess', scale.factor = 1, se =
 
    df = data.frame(std_res, fitted_values)
    names(df) = c("sqrt(std_res)", "fitted_values")
-   return (ggplot(data = df, aes(y = std_res, x = fitted_values)) +
+   return (ggplot(data = df, aes(x = fitted_values, y = sqrt(abs(std_res)))) +
               geom_point(size = scale.factor) +
               geom_smooth(method = method, se = se, size = scale.factor, color = "indianred3") +
               ggtitle("Scale-Location Plot") +
-              labs(x="Sqrt(Standardized Residuals)", y = "Fitted Values"))
+              labs(x="Fitted Values", y = "Sqrt(Standardized Residuals)"))
 }
