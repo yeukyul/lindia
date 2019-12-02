@@ -19,17 +19,20 @@ gg_reshist <- function(fitted.lm, bins = NULL) {
    handle_exception(fitted.lm, "gg_reshist")
 
    #obtain residual and fitted values from fitted.lm
-   res = data.frame(residuals = residuals(fitted.lm))
+   res = data.frame(residuals = rstandard(fitted.lm))
 
-   if (is.null(bins)) {
-      return (ggplot(data = res, aes(x = residuals)) + geom_histogram(color = "white") +
-                 ggtitle("Histogram of Residuals") +
-                 labs(x = "Residuals"))
-   }
-   else {
-      return (ggplot(data = res, aes(x = residuals)) + geom_histogram(color = "white", bins = bins) +
-                 ggtitle("Histogram of Residuals") +
-                 labs(x = "Residuals", y = "Count"))
-   }
-
+   ggplot(data = res, aes(x = residuals)) +
+      geom_histogram(
+         mapping = aes(y = ..density..),
+         position = "stack",
+         color = "black",
+         fill = "white",
+         bins = bins
+      ) +
+      stat_function(fun = dnorm, color = "blue") +
+      labs(
+         title = "Histogram of Residuals",
+         x = "Standardized Residuals",
+         y = "Density"
+      )
 }
