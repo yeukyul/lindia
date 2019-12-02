@@ -31,8 +31,8 @@
 #' @import ggplot2
 #' @importFrom gridExtra grid.arrange
 #' @importFrom stats fitted formula hatvalues qchisq qnorm quantile residuals rstandard
-gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE, 
-                        scale.factor = 0.5, boxcox = FALSE, max.per.page = NA) 
+gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
+                        scale.factor = 0.5, boxcox = FALSE, max.per.page = NA)
    {
 
    handle_exception(fitted.lm, "gg_diagnose")
@@ -54,8 +54,8 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
    if (!(is.null(theme))) {
       plots = lapply(plots, function(plot) { plot + theme })
    }
-   
-   # handle malformed max.per.page request 
+
+   # handle malformed max.per.page request
    if (is.na(max.per.page)) {
       max.per.page = length(plots)
    } else if (class(max.per.page) != "numeric" || max.per.page < 1) {
