@@ -19,7 +19,7 @@ gg_boxcox <- function(fitted.lm, showlambda = TRUE, lambdaSF = 3, scale.factor =
    handle_exception(fitted.lm, "gg_boxcox")
 
    # compute boxcox graph points
-   boxcox_object <- boxcox(fitted.lm, plotit = FALSE)
+   boxcox_object <- boxcox(fitted.lm, plotit = FALSE,interp=TRUE)
 
    # create new dataframe to hold all x and y points
    x <- unlist(boxcox_object$x)
