@@ -33,7 +33,8 @@ gg_resX <- function(fitted.lm, plot.all = TRUE, scale.factor = 0.5, max.per.page
    lm_matrix = fortify(fitted.lm)
 
    # extract relevant explanatory variables in model matrix
-   var_names = get_varnames(fitted.lm)$predictor
+   var_names = get_varnames(fitted.lm)$predictors
+   if (is.null(var_names)) return()
    dim = length(var_names)
 
    # create a list to hold all residual plots
@@ -54,8 +55,8 @@ gg_resX <- function(fitted.lm, plot.all = TRUE, scale.factor = 0.5, max.per.page
 
    # rename the plots
    names(plots) = var_names
-   
-   # handle malformed max.per.page request 
+
+   # handle malformed max.per.page request
    if (is.na(max.per.page)) {
       max.per.page = length(plots)
    } else if (class(max.per.page) != "numeric" || max.per.page < 1) {
@@ -77,7 +78,7 @@ gg_resX <- function(fitted.lm, plot.all = TRUE, scale.factor = 0.5, max.per.page
 # arrange.plots arranges plot to pages according to max.per.page
 #
 arrange.plots <- function(plots, plots.per.page, ncol) {
-   
+
    # get total number of plots
    len <- length(plots)
    if (plots.per.page >= len) {
@@ -88,10 +89,10 @@ arrange.plots <- function(plots, plots.per.page, ncol) {
       }
       return (do.call("grid.arrange", c(plots, ncol = nCol)))
    }
-   
+
    # get pages needed
    pages <- ceiling(len/plots.per.page)
-   
+
    for (i in 1:pages) {
      start = (i - 1) * (plots.per.page) + 1
      end = min(i * plots.per.page, len)
