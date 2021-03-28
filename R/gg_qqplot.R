@@ -15,7 +15,7 @@ gg_qqplot <- function(fitted.lm, scale.factor = 1) {
    handle_exception(fitted.lm, "gg_qqplot")
 
    # extract residuals from lm object
-   res = residuals(fitted.lm)
+   res = stats::rstandard(fitted.lm)
 
    # calculate slope and interncept for qqline
    slope = (quantile(res, .75) - quantile(res, .25)) / (qnorm(.75) - qnorm(.25))
@@ -27,6 +27,6 @@ gg_qqplot <- function(fitted.lm, scale.factor = 1) {
       stat_qq(aes(sample = res), size = scale.factor) +
       labs(x = "Theoretical Quantile", y = "Standardized Residual") +
       geom_abline(data = qq_line ,aes(intercept = intercept ,slope = slope), color = "indianred3", size = scale.factor) +
-      ggtitle("Normal-QQ Plot")
+      ggtitle("Normal QQ Plot")
    qq_plot
 }

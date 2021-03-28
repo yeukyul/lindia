@@ -4,7 +4,7 @@
 # strsplit_vec - splits a string and returns a vector
 #
 # input: str - string to be splitted
-#        split - character to be splitted by 
+#        split - character to be splitted by
 # output: a vector as a result of string splitting
 #
 strsplit_vec <- function(str, split) {
@@ -53,28 +53,21 @@ get_ncol <- function(n_plots) {
 #                    [[2]] : vector of interaction terms
 #
 get_varnames <- function(lm_object) {
-   
-   lm_formula = as.character(formula(lm_object))
-   var_names_list = strsplit(lm_formula, ' ~ ')
-   var_name_vec = strsplit_vec(lm_formula, ' ~ ')
-   
-   # drop response variable
-   args_str = var_name_vec
-   
+
    # parse args in lm
-   args = unlist(strsplit_vec(args_str, " \\+ "))
+   args = attr(terms(lm_object), "term.labels")
    n_args = length(args)
    predictors = c()
    interaction = list()
-   
+
    # count how many interaction terms there are
    # used for storing variables in return list
    n_inter = 1
-   
+
    # find interaction terms
    for (i in 1:n_args) {
       term = args[i]
-      
+
       # check if it is interaction term
       # !! caution: check if it works with multiple interaction
       if (grepl(' \\* ', term)) {
@@ -82,14 +75,18 @@ get_varnames <- function(lm_object) {
          predictors = c(predictors, inter_terms)
          interaction[[n_inter]] = inter_terms
          n_inter = n_inter + 1
+      } else if (grepl(':', term)) {
+         inter_terms = unlist(strsplit(term, ":"))
+         interaction[[n_inter]] = inter_terms
+         n_inter = n_inter + 1
       }
       else {
          predictors = c(predictors, term)
       }
    }
-   
+
    # clean up duplicated predictors from extracting from interaction terms
    predictors = unique(predictors)
-   
+
    return (list(predictors = predictors, interactions = interaction))
 }
