@@ -1,5 +1,4 @@
 
-
 #' Plot all diagnostic plots given fitted linear regression line.
 #'
 #' @param fitted.lm lm object that contains fitted regression
@@ -31,11 +30,16 @@
 #' @import ggplot2
 #' @importFrom gridExtra grid.arrange
 #' @importFrom stats fitted formula hatvalues qchisq qnorm quantile residuals rstandard
-gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE, 
+gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, to.plot = "all", 
                         scale.factor = 0.5, boxcox = FALSE, max.per.page = NA) 
    {
 
    handle_exception(fitted.lm, "gg_diagnose")
+  
+   if(!(tolower(to.plot) %in% c("all", "base_r", "list"))) {
+     to.plot = "all"
+     message("`to.plot` defaulting to 'all': incorrect value supplied in function call.")
+   }
 
    plots = list()
    # get all plots
@@ -62,13 +66,18 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
       message("Maximum plots per page invalid; switch to default")
       max.per.page = length(plots)
    }
-
+  
    # determine to plot the plots, or return a list of plots
-   if (plot.all) {
+   if (all(tolower(to.plot)=="all")) {
       return(arrange.plots(plots, max.per.page, ncol))
    }
-   else {
-      return (plots)
+   
+   if (all(tolower(to.plot)=="base_r")) {
+     return(arrange.plots(plots[c(4,3,5,6)], max.per.page, ncol))
+   }
+   
+   if (all(tolower(to.plot)=="list")) {
+      return(plots)
    }
 
 }
