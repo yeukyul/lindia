@@ -44,7 +44,7 @@ Followed are functions implemented in `lindia`:
 -   [`gg_cooksd()`](#gg_cooksd): Cook's distance plot with potential outliars labeled on top
 -   [`gg_diagnose()`](#gg_diagnose): All diagnostic plots, layed out in a grid
 
-`gg_resX()` and `gg_diagnose()` would return multiple plots after a call to the function. By default, they would return one aggregate plot of all diagnostic plots as one arranged grid. If user needs more flexibility in determining graphical elements and inclusion/exclusion of certain plots, set `to.plot` parameter in the function call to 'list'. It will return a list of all plots, which user can manipulate. Another possible value for `to.plot` is 'base_r', which prints out the base R graphics.
+`gg_resX()` and `gg_diagnose()` would return multiple plots after a call to the function. By default, they would return one aggregate plot of all diagnostic plots as one arranged grid. If user needs more flexibility in determining graphical elements and inclusion/exclusion of certain plots, set `to.plot` parameter in the function call to 'list'. It will return a list of all plots, which user can manipulate. Another possible value for `to.plot` is `base_r`, which prints out the base R graphics.
 
 An example would as be followed:
 
@@ -196,7 +196,7 @@ gg_diagnose(cars_lm_2, theme = theme_bw())
 
 ![](figures/README-unnamed-chunk-17-1.png)
 
-If user set `to.plot` parameter to 'list', `gg_diagnose` would return a list of ggplot objects which user can manipulate. The other two possible values for this parameter are 'all' and 'base_r', with the former printing out all 9 graphs and the latter printing out base R graphics. `lindia` also provides a handy trick that allows user to scale all point sizes and linewidth at once, using the parameter `scale.factor`. Followed is an extreme example by setting `scale.factor` to 0.3.
+If user set `to.plot` parameter to 'list', `gg_diagnose` would return a list of ggplot objects which user can manipulate. The other two possible values for this parameter are `all` and `base_r`, with the former printing out all 9 graphs and the latter printing out base R graphics. `lindia` also provides a handy trick that allows user to scale all point sizes and linewidth at once, using the parameter `scale.factor`. Followed is an extreme example by setting `scale.factor` to 0.3.
 
 ``` r
 gg_diagnose(cars_lm_2, theme = theme_bw(), scale.factor = 0.3)
