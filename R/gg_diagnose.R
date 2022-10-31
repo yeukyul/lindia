@@ -1,5 +1,4 @@
 
-
 #' Plot all diagnostic plots given fitted linear regression line.
 #'
 #' @param fitted.lm lm object that contains fitted regression
@@ -36,6 +35,11 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
    {
 
    handle_exception(fitted.lm, "gg_diagnose")
+  
+   if(!(plot.all %in% c(TRUE, FALSE, "base_r"))) {
+     plot.all = TRUE
+     message("`plot.all` defaulting to TRUE: incorrect value supplied in function call.")
+   }
 
    plots = list()
    # get all plots
@@ -62,13 +66,16 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
       message("Maximum plots per page invalid; switch to default")
       max.per.page = length(plots)
    }
-
+  
    # determine to plot the plots, or return a list of plots
-   if (plot.all) {
-      return(arrange.plots(plots, max.per.page, ncol))
+   if (plot.all == TRUE) {
+     return(arrange.plots(plots, max.per.page, ncol))
+   }
+   else if (plot.all == "base_r") {
+     return(arrange.plots(plots[c("res_fitted","qqplot","scalelocation","resleverage")], max.per.page, ncol))
    }
    else {
-      return (plots)
+     return (plots)
    }
 
 }
