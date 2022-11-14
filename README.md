@@ -44,7 +44,7 @@ Followed are functions implemented in `lindia`:
 -   [`gg_cooksd()`](#gg_cooksd): Cook's distance plot with potential outliars labeled on top
 -   [`gg_diagnose()`](#gg_diagnose): All diagnostic plots, layed out in a grid
 
-gg_resX() and gg_diagnose() would return multiple plots after a call to the function. By default, they would return one aggregate plot of all diagnostic plots as one arranged grid. If user needs more flexibility in determining graphical elements and inclusion/exclusion of certain plots, set plot.all parameter in the function call to FALSE. It will return a list of all plots, which user can manipulate. The plot.all parameter can also be sset to `base_r` to display only the four base R graphics plots.
+gg_resX() and gg_diagnose() would return multiple plots after a call to the function. By default, they would return one aggregate plot of all diagnostic plots as one arranged grid. If user needs more flexibility in determining graphical elements and inclusion/exclusion of certain plots, set plot.all parameter in the function call to FALSE. It will return a list of all plots, which user can manipulate. The plot.all parameter can also be set to `base_r` to display only the four base R graphics plots.
 
 An example would as be followed:
 
