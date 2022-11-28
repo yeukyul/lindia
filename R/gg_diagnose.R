@@ -30,15 +30,15 @@
 #' @import ggplot2
 #' @importFrom gridExtra grid.arrange
 #' @importFrom stats fitted formula hatvalues qchisq qnorm quantile residuals rstandard
-gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, to.plot = "all", 
+gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE, mode = "all",
                         scale.factor = 0.5, boxcox = FALSE, max.per.page = NA) 
    {
 
    handle_exception(fitted.lm, "gg_diagnose")
   
-   if(!(tolower(to.plot) %in% c("all", "base_r", "list"))) {
-     to.plot = "all"
-     message("`to.plot` defaulting to 'all': incorrect value supplied in function call.")
+   if(!(plot.all %in% c(TRUE, FALSE, "base_r"))) {
+     plot.all = TRUE
+     message("`plot.all` defaulting to TRUE: incorrect value supplied in function call.")
    }
 
    plots = list()
@@ -66,18 +66,18 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, to.plot = "all",
       message("Maximum plots per page invalid; switch to default")
       max.per.page = length(plots)
    }
+   
+   if (mode == "base_r") {
+     plots = plots[c("res_fitted","qqplot","scalelocation","resleverage")]
+   } else if (mode != "all") {
+     message("`mode` has invalid value, using 'all'")
+   }
   
    # determine to plot the plots, or return a list of plots
-   if (all(tolower(to.plot)=="all")) {
-      return(arrange.plots(plots, max.per.page, ncol))
-   }
-   
-   if (all(tolower(to.plot)=="base_r")) {
-     return(arrange.plots(plots[c(4,3,5,6)], max.per.page, ncol))
-   }
-   
-   if (all(tolower(to.plot)=="list")) {
-      return(plots)
+   if (plot.all == TRUE) {
+     return(arrange.plots(plots, max.per.page, ncol))
+   } else {
+     return (plots)
    }
 
 }
