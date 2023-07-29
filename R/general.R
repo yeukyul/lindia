@@ -61,7 +61,7 @@ get_varnames <- function(lm_object) {
    args_str = var_name_vec
    
    # parse args in lm
-   if (grepl(args_str, " \\+ ")) {
+   if (grepl(" \\+ ", args_str)) {
      # if there is more than one term
      args = unlist(strsplit_vec(args_str, " \\+ "))
    } else {
