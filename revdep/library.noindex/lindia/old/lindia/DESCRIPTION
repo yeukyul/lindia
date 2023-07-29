@@ -1,7 +1,7 @@
 Package: lindia
 Type: Package
 Title: Automated Linear Regression Diagnostic
-Version: 0.10
+Version: 0.9
 Authors@R: c(person("Yeuk Yu", "Lee", 
     email = "lyeukyu@gmail.com", 
     role = c("aut", "cre")),
@@ -16,14 +16,19 @@ Description: Provides a set of streamlined functions that allow
     "The Grammar of Graphics" as implemented in 'ggplot2'.
     See the 'ggplot2' website for more information regarding the
     specific capability of graphics.
-Depends:
-    R (>= 3.2.2)
+Depends: R (>= 3.2.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.2.3
-Imports:
-    MASS,
-    ggplot2,
-    gridExtra
+LazyData: true
+RoxygenNote: 6.0.1
+Imports: MASS, ggplot2, gridExtra
 URL: https://github.com/yeukyul/lindia
 BugReports: https://github.com/yeukyul/lindia/issues
+NeedsCompilation: no
+Packaged: 2017-05-10 02:16:28 UTC; edwardlee
+Author: Yeuk Yu Lee [aut, cre],
+  Samuel Ventura [aut]
+Maintainer: Yeuk Yu Lee <lyeukyu@gmail.com>
+Repository: CRAN
+Date/Publication: 2017-05-10 02:29:20 UTC
+Built: R 4.3.0; ; 2023-07-12 01:20:35 UTC; unix

@@ -16,14 +16,18 @@ Description: Provides a set of streamlined functions that allow
     "The Grammar of Graphics" as implemented in 'ggplot2'.
     See the 'ggplot2' website for more information regarding the
     specific capability of graphics.
-Depends:
-    R (>= 3.2.2)
+Depends: R (>= 3.2.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.2.3
-Imports:
-    MASS,
-    ggplot2,
-    gridExtra
+Imports: MASS, ggplot2, gridExtra
 URL: https://github.com/yeukyul/lindia
 BugReports: https://github.com/yeukyul/lindia/issues
+RemoteType: local
+RemoteUrl: /Users/tlee/Desktop/personal/projects/lindia/lindia
+NeedsCompilation: no
+Packaged: 2023-07-29 20:34:13 UTC; tlee
+Author: Yeuk Yu Lee [aut, cre],
+  Samuel Ventura [aut]
+Maintainer: Yeuk Yu Lee <lyeukyu@gmail.com>
+Built: R 4.3.1; ; 2023-07-29 20:34:13 UTC; unix
