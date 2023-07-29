@@ -7,6 +7,10 @@
 #' @param plot.all logical; determine whether plot will be returned as
 #' an arranged grid. When set to false, the function
 #' will return a list of diagnostic plots. Parameter defaults to TRUE.
+#' @param mode specify the set of graphics to be returned: "base_r", "all" (the default) 
+#' @param mode A string. Specifies which set of diagnostic plots to return:
+#'   * `all` (the default)
+#'   * `base_r`: only graphs included in the base R `plot(lm(...))` (i.e. residual vs fitted, QQ plot, scale location, residual vs leverage)
 #' @param scale.factor numeric; scales the point size, linewidth, labels in all diagnostic plots to allow optimal viewing. Defaults to 0.5.
 #' @param boxcox logical; detemine whether boxcox plot will be included. Parameter defaults to FALSE.
 #' @param max.per.page numeric; maximum number of plots allowed in one page.
