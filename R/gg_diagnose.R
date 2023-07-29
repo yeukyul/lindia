@@ -1,5 +1,4 @@
 
-
 #' Plot all diagnostic plots given fitted linear regression line.
 #'
 #' @param fitted.lm lm object that contains fitted regression
@@ -8,6 +7,9 @@
 #' @param plot.all logical; determine whether plot will be returned as
 #' an arranged grid. When set to false, the function
 #' will return a list of diagnostic plots. Parameter defaults to TRUE.
+#' @param mode A string. Specifies which set of diagnostic plots to return:
+#'   * `all` (the default)
+#'   * `base_r`: only graphs included in the base R `plot(lm(...))` (i.e. residual vs fitted, QQ plot, scale location, residual vs leverage)
 #' @param scale.factor numeric; scales the point size, linewidth, labels in all diagnostic plots to allow optimal viewing. Defaults to 0.5.
 #' @param boxcox logical; detemine whether boxcox plot will be included. Parameter defaults to FALSE.
 #' @param max.per.page numeric; maximum number of plots allowed in one page.
@@ -31,11 +33,16 @@
 #' @import ggplot2
 #' @importFrom gridExtra grid.arrange
 #' @importFrom stats fitted formula hatvalues qchisq qnorm quantile residuals rstandard
-gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE, 
+gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE, mode = "all",
                         scale.factor = 0.5, boxcox = FALSE, max.per.page = NA) 
    {
 
    handle_exception(fitted.lm, "gg_diagnose")
+  
+   if(!(plot.all %in% c(TRUE, FALSE, "base_r"))) {
+     plot.all = TRUE
+     message("`plot.all` defaulting to TRUE: incorrect value supplied in function call.")
+   }
 
    plots = list()
    # get all plots
@@ -62,13 +69,18 @@ gg_diagnose <- function(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
       message("Maximum plots per page invalid; switch to default")
       max.per.page = length(plots)
    }
-
-   # determine to plot the plots, or return a list of plots
-   if (plot.all) {
-      return(arrange.plots(plots, max.per.page, ncol))
+   
+   if (mode == "base_r") {
+     plots = plots[c("res_fitted","qqplot","scalelocation","resleverage")]
+   } else if (mode != "all") {
+     message("`mode` has invalid value, using 'all'")
    }
-   else {
-      return (plots)
+  
+   # determine to plot the plots, or return a list of plots
+   if (plot.all == TRUE) {
+     return(arrange.plots(plots, max.per.page, ncol))
+   } else {
+     return (plots)
    }
 
 }
