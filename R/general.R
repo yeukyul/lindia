@@ -12,7 +12,6 @@ strsplit_vec <- function(str, split) {
 }
 
 
-
 #
 # n_cat - returns the index of categorical varible in given regression
 #
@@ -62,7 +61,12 @@ get_varnames <- function(lm_object) {
    args_str = var_name_vec
    
    # parse args in lm
-   args = unlist(strsplit_vec(args_str, " \\+ "))
+   if (grepl(args_str, " \\+ ")) {
+     # if there is more than one term
+     args = unlist(strsplit_vec(args_str, " \\+ "))
+   } else {
+     args = c(args_str)
+   }
    n_args = length(args)
    predictors = c()
    interaction = list()
