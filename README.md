@@ -11,7 +11,7 @@ cars_lm <- lm(Price ~ Passengers + Length + RPM, data = Cars93)
 gg_diagnose(cars_lm)
 ```
 
-![](figures/README-unnamed-chunk-2-1.png)
+![](figures/lindia-main.png)
 
 The functionality of lindia is an improvement of the features provided in base-R graphs. Using base-R, user can also create a series of diagnostic plots using the following line:
 
@@ -161,7 +161,7 @@ Plots scale location graph of linear model.
 gg_scalelocation(cars_lm)
 ```
 
-![](figures/README-unnamed-chunk-14-1.png)
+![](figures/lindia-scale-location.png)
 
 gg\_resleverage
 ===============
