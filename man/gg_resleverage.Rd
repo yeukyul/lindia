@@ -10,7 +10,7 @@ gg_resleverage(fitted.lm, method = "loess", se = FALSE, scale.factor = 1)
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
 
 \item{method}{smoothing method of fitted line on scale-location plot.
-eg. "lm", "glm", "gam", "loess", "rlm". See \url{http://docs.ggplot2.org/current/geom_smooth.html}
+eg. "lm", "glm", "gam", "loess", "rlm". See \url{https://ggplot2.tidyverse.org/reference/geom_smooth.html}
 for more details.}
 
 \item{se}{logical; determines whether se belt should be plotted on plot}

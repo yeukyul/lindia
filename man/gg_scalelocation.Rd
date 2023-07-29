@@ -10,7 +10,7 @@ gg_scalelocation(fitted.lm, method = "loess", scale.factor = 1, se = FALSE)
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
 
 \item{method}{smoothing method of fitted line on scale-location plot.
-eg. "lm", "glm", "gam", "loess", "rlm". See \url{http://docs.ggplot2.org/current/geom_smooth.html}
+eg. "lm", "glm", "gam", "loess", "rlm". See \url{https://ggplot2.tidyverse.org/reference/geom_smooth.html}
 for more details.}
 
 \item{scale.factor}{numeric; scales the point size and linewidth to allow customized viewing. Defaults to 1.}
