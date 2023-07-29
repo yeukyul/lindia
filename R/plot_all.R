@@ -19,14 +19,14 @@
 #' @export
 plot_all <- function(plots, ncol = NA, max.per.page = NA) {
    
-   if (class(plots) != "list") {
+   if (!inherits(plots, "list")) {
       stop("plot_all() doesn't know how to handle non-list input")
    }
 
    # handle malformed max.per.page request 
    if (is.na(max.per.page)) {
       max.per.page = length(plots)
-   } else if (class(max.per.page) != "numeric" || max.per.page < 1) {
+   } else if (!inherits(max.per.page, "numeric") || max.per.page < 1) {
       message("Maximum plots per page invalid; switch to default")
       max.per.page = length(plots)
    }

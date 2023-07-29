@@ -4,8 +4,16 @@
 \alias{gg_diagnose}
 \title{Plot all diagnostic plots given fitted linear regression line.}
 \usage{
-gg_diagnose(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
-  scale.factor = 0.5, boxcox = FALSE, max.per.page = NA)
+gg_diagnose(
+  fitted.lm,
+  theme = NULL,
+  ncol = NA,
+  plot.all = TRUE,
+  mode = "all",
+  scale.factor = 0.5,
+  boxcox = FALSE,
+  max.per.page = NA
+)
 }
 \arguments{
 \item{fitted.lm}{lm object that contains fitted regression}
@@ -17,6 +25,10 @@ gg_diagnose(fitted.lm, theme = NULL, ncol = NA, plot.all = TRUE,
 \item{plot.all}{logical; determine whether plot will be returned as
 an arranged grid. When set to false, the function
 will return a list of diagnostic plots. Parameter defaults to TRUE.}
+
+\item{mode}{A string. Specifies which set of diagnostic plots to return:
+* `all` (the default)
+* `base_r`: only graphs included in the base R `plot(lm(...))` (i.e. residual vs fitted, QQ plot, scale location, residual vs leverage)}
 
 \item{scale.factor}{numeric; scales the point size, linewidth, labels in all diagnostic plots to allow optimal viewing. Defaults to 0.5.}
 

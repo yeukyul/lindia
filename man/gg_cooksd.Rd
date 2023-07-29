@@ -4,8 +4,13 @@
 \alias{gg_cooksd}
 \title{Plot cook's distance graph}
 \usage{
-gg_cooksd(fitted.lm, label = TRUE, show.threshold = TRUE,
-  threshold = "convention", scale.factor = 0.5)
+gg_cooksd(
+  fitted.lm,
+  label = TRUE,
+  show.threshold = TRUE,
+  threshold = "convention",
+  scale.factor = 0.5
+)
 }
 \arguments{
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}

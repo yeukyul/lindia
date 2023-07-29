@@ -58,7 +58,7 @@ gg_resX <- function(fitted.lm, plot.all = TRUE, scale.factor = 0.5, max.per.page
    # handle malformed max.per.page request 
    if (is.na(max.per.page)) {
       max.per.page = length(plots)
-   } else if (class(max.per.page) != "numeric" || max.per.page < 1) {
+   } else if (!inherits(max.per.page, "numeric") || max.per.page < 1) {
       message("Maximum plots per page invalid; switch to default")
       max.per.page = length(plots)
    }

@@ -4,8 +4,13 @@
 \alias{gg_resX}
 \title{Generate residual plot of residuals against predictors}
 \usage{
-gg_resX(fitted.lm, plot.all = TRUE, scale.factor = 0.5, max.per.page = NA,
-  ncol = NA)
+gg_resX(
+  fitted.lm,
+  plot.all = TRUE,
+  scale.factor = 0.5,
+  max.per.page = NA,
+  ncol = NA
+)
 }
 \arguments{
 \item{fitted.lm}{a fitted linear model (i.e. lm, glm) that contains fitted regression}
